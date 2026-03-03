@@ -1,0 +1,484 @@
+:root {
+  /* ألوان النجيلة والملعب */
+  --primary-green: #2ecc71; /* لون النجيلة الأساسي */
+  --dark-field: #27ae60; /* لون الأخضر الغامق (زي تخطيط النجيل) */
+  --line-white: #ffffff; /* لون خطوط الملعب */
+
+  /* ألوان الحالة (حجز/متاح) */
+  --status-free: #2ecc71; /* أخضر متاح */
+  --status-busy: #e74c3c; /* أحمر محجوز */
+
+  /* ألوان الخلفية والنصوص */
+  --bg-light: #f4f7f6; /* خلفية الموقع */
+  --text-dark: #2c3e50; /* لون الخط الأساسي */
+  --footer-bg: #1a252f; /* لون الفوتر والهيدر */
+
+  /* إضافات للتنسيق */
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+nav img,
+.top-footer img {
+  width: 60px;
+  height: auto;
+}
+
+header {
+  background-color: var(--night-mode, #2c3e50);
+  padding: 10px 5%;
+  box-shadow: var(--shadow);
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 25px;
+}
+nav ul li {
+  margin: 0 15px;
+  color: var(--line-white);
+  cursor: pointer;
+  transition: 0.3s;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 3px;
+}
+nav ul li:hover {
+  transform: translateY(-5px);
+  border-bottom-color: var(--dark-field);
+}
+.main-header {
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin: 20px 0 20px 0;
+  text-align: center;
+}
+#stadiumsList {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+.studium {
+  width: 350px;
+  overflow: hidden;
+  background-color: var(--bg-light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border-bottom: 5px solid var(--primary-green);
+  transition: transform 0.3s ease;
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+.studium:hover {
+  transform: translateY(-10px);
+  border-bottom-color: var(--dark-field);
+}
+.studium a {
+  background-color: var(--primary-green);
+  color: var(--line-white);
+  padding: 12px;
+  border-radius: 0 0 8px 8px; /* عشان يركب مع حواف الكارت */
+}
+.studium img {
+  width: 100%;
+  height: 350px;
+  display: block;
+  object-fit: fill;
+}
+/* تنسيق العنوان داخل الكارت */
+.head-std {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  margin: 15px 0 10px 0; /* مسافة فوق وتحت العنوان */
+  font-weight: bold;
+  border-left: 4px solid var(--primary-green); /* حركة شياكة: خط أخضر صغير على اليمين */
+  padding-left: 10px;
+}
+
+/* تنسيق وصف الملعب */
+.details-std {
+  color: #666; /* لون رمادي هادي للوصف */
+  font-size: 0.95rem;
+  line-height: 1.6; /* مسافة بين السطور عشان الكلام ميبقاش محشور */
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+#slotsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 15px;
+  padding: 30px;
+}
+
+.slot {
+  padding: 20px;
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  border: 2px solid transparent;
+}
+
+.free {
+  background-color: #e8f5e9;
+  color: var(--dark-field);
+  border-color: var(--primary-green);
+}
+
+.busy {
+  background-color: #ffebee;
+  color: var(--status-busy);
+  border-color: var(--status-busy);
+  cursor: not-allowed;
+}
+
+.slot:hover.free {
+  transform: scale(1.05);
+  background-color: var(--primary-green);
+  color: white;
+}
+.bookForm {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border: 2px solid var(--primary-green);
+  z-index: 1000;
+  border-radius: 15px;
+}
+#bookConfirm {
+    display: none; /* مخفية في الأول وهنظهرها بالـ JS */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* عشان تيجي في النص بالظبط */
+    background-color: white;
+    padding: 30px;
+    z-index: 1000; /* عشان تظهر فوق الملاعب */
+    border-radius: var(--radius);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 450px;
+}
+
+/* تنسيق العنوان والساعة  */
+#bookConfirm h3 {
+    color: var(--dark-field);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#selectedTimeText {
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-green);
+    background: #f0fff4;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+#formRegestration legend {
+    border: none;
+    display: flex;
+    flex-direction: column; /* ترتيب العناصر تحت بعضها */
+    gap: 10px;
+}
+
+#formRegestration label {
+    font-weight: bold;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+#formRegestration input[type="text"],
+#formRegestration input[type="email"] {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+
+#formRegestration input:focus {
+    border-color: var(--primary-green);
+    outline: none;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+}
+
+/* تنسيق زرار الإرسال */
+#confirm {
+    background-color: var(--primary-green);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+#confirm:hover {
+    background-color: var(--dark-field);
+    transform: translateY(-2px);
+}
+/*success page*/
+
+.receipt-card {
+    background: #fff;
+    width: 350px;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    border-top: 8px solid #28a745; /* لون أخضر للحجز الناجح */
+}
+
+.success-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #555;
+}
+
+.info-row strong {
+    color: #000;
+}
+
+.small-text {
+    font-size: 12px;
+    color: #888;
+}
+
+hr {
+    border: 0;
+    border-top: 1px dashed #eee;
+    margin: 20px 0;
+}
+/* start myBooking page*/
+.bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.booking-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    border-right: 5px solid #28a745; /* خط أخضر جانبي */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status {
+    background: #d4edda;
+    color: #155724;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.btn-delete {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-delete:hover {
+    background: #cc0000;
+}
+/*end myBooking page*/
+
+/*start about page*/
+/* About Hero Section */
+.about-hero {
+    background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.about-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.about-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+
+/* Features Section */
+.about-features {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.about-features .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-box {
+    flex: 1;
+    min-width: 250px;
+    margin: 20px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.feature-box:hover { transform: translateY(-10px); }
+
+.feature-box i {
+    font-size: 40px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.feature-box h3 { margin-bottom: 15px; color: #333; }
+
+/* Vision Section */
+.about-vision {
+    padding: 80px 20px;
+    text-align: center;
+    background: #28a745;
+    color: white;
+}
+
+.vision-content { max-width: 800px; margin: 0 auto; }
+.vision-content h2 { font-size: 2.5rem; margin-bottom: 20px; }
+.vision-content p { font-size: 1.2rem; line-height: 1.8; opacity: 0.9; }
+/*End about page*/
+.footer-note {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 20px;
+}
+footer {
+  background-color: var(--footer-bg);
+  color: var(--line-white);
+  padding: 20px 10% 20px; /* مساحة واسعة من الأطراف */
+  margin-top: 50px;
+}
+
+.top-footer {
+  display: flex;
+  justify-content: space-between; /* توزيع الأعمدة بالتساوي */
+  align-items: center;
+  justify-items: center;
+
+  gap: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* خط رفيع للفصل */
+  padding-bottom: 10px;
+}
+
+/* تنسيق اللوجو داخل الفوتر */
+.top-footer > div:first-child {
+  min-width: 200px;
+}
+
+.top-footer img {
+  width: 100px;
+  margin-bottom: 15px;
+}
+
+/* تنسيق القوائم */
+.top-footer ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 40px; /* المسافة بين الأعمدة الرئيسية */
+  align-items: center;
+  justify-items: center;
+  
+}
+
+.top-footer h3 {
+  color: var(--primary-green);
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.top-footer .footer-links, 
+.top-footer .contact, 
+.top-footer .social {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.top-footer a {
+  color: #bdc3c7;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.top-footer a:hover {
+  color: var(--primary-green);
+  transform: translateX(-5px); /* حركة بسيطة لليمين عند الوقوف عليه */
+}
+
+/* الجزء السفلي (Copyright) */
+.bottom-footer {
+  text-align: center;
+  padding-top: 20px;
+  color: #7f8c8d;
+  font-size: 13px;
+}

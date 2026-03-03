@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color-primary:#FF0000;
+  --color-text: #980404;
+  --color-background: #f9fafb;
+  --color-heading: #000;
+ --secondry-color: #EA7B7B;
+}
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--color-background);
+font-family: Lucida Calligraphy;
+}
+#header {
+    background-color:#FF0000;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 10p;
+    height: 100px;
+}
+div >  h1{
+    color: var(--color-heading);
+    padding: 30px;
+    text-align: center;
+}
+#linksbar{
+  background-color: grey;
+  display: block;
+  float: left;
+  width: 25%;
+}
+#loginform{
+  border: dashed 2px rgb(20,70,60);
+}
+#content{
+  /* span is inline element for that we must use display: block;*/
+      display: block;
+    width: 75%;
+    background-color: pink;
+    float: left;
+}

@@ -1,0 +1,49 @@
+input[required][type:"email"] {
+    border: 2px solid red;
+}
+input[required][type:"email"]:valid {
+    border: 2px solid red;
+}
+/*
+دى عشان اجيب اى صورة اخرها png*/
+img[src$=".jpg"] {
+    border: 2px solid red;
+}
+/*اى حاجه بتبدأ ب https*/
+a[href^="https"] {
+    border: 2px solid red;
+}
+/*اى حاجه تحتوى او contain*/
+a[href*=".jpg"] {
+    border: 2px solid red;
+}
+.btn:active {
+    background-color: red;
+}
+.btn:focus {
+    background-color: blue;
+}
+/*peudo-class and pseudo-element
+*/
+.btn ::after {
+    content: "  after btn";
+    color: red;
+    font-size: 20px;
+}
+p::first-letter {
+    font-size: 30px;
+    color: green;
+}
+/*box model position*/
+
+p{
+    position: sticky;
+    top: 0;
+}
+p{
+    position:relative;
+    left: 20px;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+}

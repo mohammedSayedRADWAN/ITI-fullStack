@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inspiration Quotes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            margin: 5px 0;
+        }
+        #quote {
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #favorites {
+            margin-top: 20px;
+        }
+        .output {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        input[type="text"], input[type="date"] {
+            padding: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Programming Inspiration 💻</h1>
+
+    <button id="getQuoteBtn" onclick="random_qoute()">Get Inspired</button>
+    <button id="favoriteBtn" onclick="addfavouriteQoutes()">Favorite</button>
+    <button id="showFavBtn" onclick="showfavouriteQoutes()">Show Favorites</button>
+
+    <p id="quote">Click "Get Inspired" to see a quote</p>
+
+    <ul id="stats">
+        <li>Characters: <span id="charCount" onclick="random_qoute()">0</span></li>
+        <li>Words: <span id="wordCount" onclick="random_qoute()">0</span></li>
+        <li>Vowels: <span id="vowelCount" onclick="random_qoute()">0</span></li>
+    </ul>
+
+    <div id="favorites">
+        <h3>Favorite Quotes</h3>
+        <ul id="favList"></ul>
+    </div>
+   
+
+    <h1>Comprehensive Date-Time Display System</h1>
+
+    <!-- ===== Current Date/Time Section ===== -->
+    <section id="currentDateTimeSection">
+        <h2>Current Date/Time</h2>
+        <button id="showDateTimeBtn" onclick="showDateTime();">Show Current Date/Time</button>
+
+        <div class="output" id="dateTimeOutput">
+            <!-- Current date/time info will appear here -->
+        </div>
+    </section>
+
+    <!-- ===== Age Calculator Section ===== -->
+    <section id="ageCalculatorSection">
+                <h2>Age Calculator</h2>
+                <button onclick="ageCalculator()">Calculate</button>
+    </section>
+
+    <section id="countDownTimerSection">
+                <h2>Countdown Timer</h2>
+
+    </section>
+ <section id="email-validation">
+                <h2>email validation</h2>
+
+    </section>
+    <script src="main.js" defer></script>
+</body>
+</html>

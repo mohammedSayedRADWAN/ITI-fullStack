@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Sayed - CV</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="main-cv-container">
+        <header class="cv-header">
+            <picture class="logo-container">
+                <source media="(max-width: 600px)" srcset="./img/logo-small.jpg">
+                <img class="logo" src="./img/logo.jpg" alt="logo">
+            </picture>
+            <div class="header-info">
+                <h1>Mohamed Sayed</h1>
+                <span class="job-title">Back-End Developer</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis accusantium repellendus labore
+                    nesciunt.</p>
+            </div>
+        </header>
+
+        <main class="cv-content">
+            <section class="right-column">
+                <div class="achievement-box">
+                    <video id="myVideo" src="1.mp4" playsinline muted></video>
+                    <h3>Achievements</h3>
+                    <div class="goal">
+                        <time datetime="2010">2010</time>
+                        <span>Lorem Project</span>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ad atque fugiat dolorum eos.</p>
+                    </div>
+                </div>
+
+                <div class="achievement-box">
+                    <h3>Education</h3>
+                    <div class="goal">
+                        <time datetime="2010">2010</time>
+                        <span>Bachelor's Degree</span>
+                        <p>Description of your studies goes here.</p>
+                    </div>
+                </div>
+
+                <div class="achievement-box">
+                    <h3>Work Experience </h3>
+                    <div class="goal">
+                        <time datetime="2010">2010</time>
+                        <span>Bachelor's Degree</span>
+                        <p>Description of your studies goes here.</p>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="left-column">
+                <div class="contact-box" id="myClickableDiv">
+                    <audio id="myAudio" src="notification.mp3" preload="auto"></audio>
+                    <h3>Contact</h3>
+                    <div class="contact-item"><i class="fa-solid fa-location-dot"></i> <span>Cairo, Egypt</span></div>
+                    <div class="contact-item"><i class="fa-solid fa-phone"></i> <span>123-456-789</span></div>
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i> <span>info@gmail.com</span></div>
+                </div>
+
+                <div class="skills-box">
+                    <h3>Languages</h3>
+                    <div>
+                        <span style="float: left; margin: -8px auto;     margin-right: 8px;">english</span>
+                        <div class="skill-bar">
+                            <div class="progress" style="width: 75%; background-color: brown;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span style="float: left; margin: -8px auto;    margin-right: 8px;">french</span>
+
+                        <div class="skill-bar">
+                            <div class="progress" style="width: 90%; background-color: aqua;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span style="float: left; margin: -8px auto;     margin-right: 8px;">germaine</span>
+
+                        <div class="skill-bar">
+                            <div class="progress" style="width: 50%; background-color: green;"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="online-info">
+                    <h3>Online Info</h3>
+                    <div class="social-links">
+                        <div class="social-item">
+                            <img src="./img/facebook.png" alt="FB" width="25">
+                            <span>Facebook</span>
+                        </div>
+                        <div class="social-item">
+                            <img src="./img/google.png" alt="G" width="25">
+                            <span>Google</span>
+                        </div>
+                    </div>
+                    <div class="rating-box">
+                        <h3>Rating</h3>
+                        <div class="stars">
+                            <i class="fa-regular fa-star" data-clicked="false"></i>
+                            <i class="fa-regular fa-star" data-clicked="false"></i>
+                            <i class="fa-regular fa-star" data-clicked="false"></i>
+                            <i class="fa-regular fa-star" data-clicked="false"></i>
+                            <i class="fa-regular fa-star" data-clicked="false"></i>
+                        </div>
+                    </div>
+            </aside>
+        </main>
+
+        <footer class="cv-footer">
+            <div class="color-bar red"></div>
+            <div class="color-bar orange"></div>
+            <div class="color-bar indigo"></div>
+        </footer>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>

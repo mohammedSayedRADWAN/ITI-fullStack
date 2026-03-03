@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 8 Lab</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Login Form</h2>
+
+<form id="loginForm">
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+
+  <label>
+    <input type="checkbox" id="remember"> Remember Me
+  </label>
+
+  <button type="submit">Login</button>
+</form>
+
+<p id="message"></p>
+
+<hr>
+
+<h2>Students Data (JSON)</h2>
+<div id="students"></div>
+
+<hr>
+
+<h2>Get User By ID (AJAX)</h2>
+<input type="number" id="userId" placeholder="User ID">
+<button onclick="getUser()">Display</button>
+<div id="singleUser"></div>
+
+<hr>
+
+<h2>Users List</h2>
+<select id="usersList"></select>
+<div id="userData"></div>
+
+<script src="main.js"></script>
+</body>
+</html>

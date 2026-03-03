@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-Commerce Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold">
+                <img src="src/logo.png" alt="logo">
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <span id="userInfo" class="text-white me-2"></span>
+                
+                <a href="#" class="btn btn-outline-danger btn-sm" id="logoutLink">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="admin-page-title">
+                    <i class="bi bi-speedometer2"></i> Admin Dashboard
+                </h1>
+                <p class="admin-page-subtitle">Manage products and orders from one central location</p>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs admin-tabs mb-4" id="adminTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products"
+                    type="button" role="tab" aria-controls="products" aria-selected="true">
+                    <i class="bi bi-box-seam"></i> Product Management
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button"
+                    role="tab" aria-controls="orders" aria-selected="false">
+                    <i class="bi bi-cart-check"></i> Order Management
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="adminTabContent">
+            <!-- Products Tab -->
+            <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="products-tab">
+                <div class="row">
+                    <!-- Add Product Form -->
+                    <div class="col-lg-4 mb-4">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h5 class="admin-card-title">
+                                    <i class="bi bi-plus-circle"></i> Add New Product
+                                </h5>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="addProductForm">
+                                    <div class="mb-3">
+                                        <label for="productName" class="admin-form-label">Product Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control admin-input" id="productName"
+                                            placeholder="Enter product name" required>
+                                        <div class="admin-form-feedback" id="nameFeedback"></div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="productCategory" class="admin-form-label">Category <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select admin-input" id="productCategory" required>
+                                            <option value="">Select category</option>
+                                            <option value="Coats">Coats</option>
+                                            <option value="Sweaters">Sweaters</option>
+                                            <option value="Shirts">Shirts</option>
+                                            <option value="Pants">Pants</option>
+                                            <option value="Accessories">Accessories</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="productPrice" class="admin-form-label">Price ($) <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control admin-input" id="productPrice"
+                                                placeholder="0.00" step="0.01" min="0" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="productOriginalPrice" class="admin-form-label">Original Price
+                                                ($)</label>
+                                            <input type="number" class="form-control admin-input" id="productOriginalPrice"
+                                                placeholder="0.00" step="0.01" min="0">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="productStock" class="admin-form-label">Stock Quantity <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" class="form-control admin-input" id="productStock"
+                                            placeholder="0" min="0" required>
+                                        <small class="text-muted">Current available stock</small>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="productDescription" class="admin-form-label">Description</label>
+                                        <textarea class="form-control admin-input" id="productDescription" rows="3"
+                                            placeholder="Enter product description"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="productImage" class="admin-form-label">Image URL</label>
+                                        <input type="url" class="form-control admin-input" id="productImage"
+                                            placeholder="https://example.com/image.png">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="admin-form-label">Sizes</label>
+                                        <div class="admin-checkbox-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sizeS" value="S">
+                                                <label class="form-check-label" for="sizeS">S</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sizeM" value="M">
+                                                <label class="form-check-label" for="sizeM">M</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sizeL" value="L">
+                                                <label class="form-check-label" for="sizeL">L</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sizeXL" value="XL">
+                                                <label class="form-check-label" for="sizeXL">XL</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="sizeXXL" value="XXL">
+                                                <label class="form-check-label" for="sizeXXL">XXL</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn admin-btn-primary">
+                                            <i class="bi bi-plus-circle"></i> Add Product
+                                        </button>
+                                        <button type="reset" class="btn admin-btn-secondary">
+                                            <i class="bi bi-arrow-clockwise"></i> Reset Form
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products List -->
+                    <div class="col-lg-8">
+                        <div class="admin-card">
+                            <div class="admin-card-header d-flex justify-content-between align-items-center">
+                                <h5 class="admin-card-title mb-0">
+                                    <i class="bi bi-list-ul"></i> All Products
+                                </h5>
+                                <div class="admin-search-box">
+                                    <input type="text" class="form-control admin-search-input" id="productSearch"
+                                        placeholder="Search products...">
+                                    <i class="bi bi-search admin-search-icon"></i>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="table-responsive">
+                                    <table class="table admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Stock</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productsTableBody">
+                                            <!-- Products will be loaded here -->
+                                            <tr>
+                                                <td colspan="7" class="text-center text-muted py-4">
+                                                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                                    No products found. Add your first product!
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                <div class="row mb-4">
+                    <!-- Filters -->
+                    <div class="col-12">
+                        <div class="admin-card">
+                            <div class="admin-card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="orderSearch" class="admin-form-label">Search Orders</label>
+                                        <div class="admin-search-box">
+                                            <input type="text" class="form-control admin-search-input" id="orderSearch"
+                                                placeholder="Search by order ID, customer...">
+                                            <i class="bi bi-search admin-search-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="customerFilter" class="admin-form-label">Filter by Customer</label>
+                                        <select class="form-select admin-input" id="customerFilter">
+                                            <option value="">All Customers</option>
+                                            <option value="customer@123.com">customer@123.com</option>
+                                            <option value="john@example.com">john@example.com</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="statusFilter" class="admin-form-label">Filter by Status</label>
+                                        <select class="form-select admin-input" id="statusFilter">
+                                            <option value="">All Statuses</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="processing">Processing</option>
+                                            <option value="shipped">Shipped</option>
+                                            <option value="delivered">Delivered</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="cancelled">Cancelled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h5 class="admin-card-title mb-0">
+                                    <i class="bi bi-cart-check"></i> All Orders
+                                </h5>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="table-responsive">
+                                    <table class="table admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Customer</th>
+                                                <th>Products</th>
+                                                <th>Total</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ordersTableBody">
+                                            <!-- Orders will be loaded here -->
+                                            <tr>
+                                                <td colspan="7" class="text-center text-muted py-4">
+                                                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                                    No orders found.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content admin-modal">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">
+                        <i class="bi bi-pencil-square"></i> Edit Product
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="editProductName" class="admin-form-label">Product Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control admin-input" id="editProductName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editProductCategory" class="admin-form-label">Category <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select admin-input" id="editProductCategory" required>
+                                    <option value="">Select category</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="editProductPrice" class="admin-form-label">Price ($) <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control admin-input" id="editProductPrice"
+                                    step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="editProductStock" class="admin-form-label">Stock Quantity <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control admin-input" id="editProductStock" min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editProductImage" class="admin-form-label">Image URL</label>
+                            <input type="url" class="form-control admin-input" id="editProductImage" placeholder="https://example.com/image.png">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editProductDescription" class="admin-form-label">Description</label>
+                            <textarea class="form-control admin-input" id="editProductDescription" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer admin-modal-footer">
+                    <button type="button" class="btn admin-btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn admin-btn-primary" id="saveProductBtn">
+                        <i class="bi bi-check-circle"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Order Status Modal -->
+    <div class="modal fade" id="editOrderStatusModal" tabindex="-1" aria-labelledby="editOrderStatusModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content admin-modal">
+                <div class="modal-header admin-modal-header">
+                    <h5 class="modal-title" id="editOrderStatusModalLabel">
+                        <i class="bi bi-arrow-repeat"></i> Update Order Status
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editOrderStatusForm">
+                        <input type="hidden" id="editOrderId">
+                        <div class="mb-3">
+                            <label for="editOrderStatus" class="admin-form-label">Order Status <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select admin-input" id="editOrderStatus" required>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <small class="text-muted">Note: Completed orders cannot be deleted</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer admin-modal-footer">
+                    <button type="button" class="btn admin-btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn admin-btn-primary" id="saveOrderStatusBtn">
+                        <i class="bi bi-check-circle"></i> Update Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="auth.js"></script>
+    <script src="products.js"></script>
+    <script src="orders.js"></script>
+    <script>
+        // Protect this route - only admins can access
+        if (!protectRoute('admin', './login.html')) {
+            // Redirect will happen automatically
+        }
+
+        // Update user info
+        const user = getCurrentUser();
+        if (user) {
+            const userInfo = document.getElementById('userInfo');
+            if (userInfo) {
+                userInfo.textContent = `Welcome, ${user.name} (${user.role})`;
+            }
+        }
+
+        // Logout functionality
+        const logoutLink = document.getElementById('logoutLink');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+                updateNavigation();
+                showMessage('Logged out successfully', 'success');
+                setTimeout(() => {
+                    window.location.href = './login.html';
+                }, 1000);
+            });
+        }
+
+        // ============================================
+        // PRODUCT MANAGEMENT FUNCTIONALITY
+        // ============================================
+
+        // Load categories dynamically
+        function loadCategories() {
+            const categories = getAllCategories();
+            const categorySelects = document.querySelectorAll('#productCategory, #editProductCategory');
+            categorySelects.forEach(select => {
+                const currentValue = select.value;
+                // Clear existing options except the first one
+                while (select.options.length > 1) {
+                    select.remove(1);
+                }
+                // Add categories
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    select.appendChild(option);
+                });
+                // Restore previous value if exists
+                if (currentValue) {
+                    select.value = currentValue;
+                }
+            });
+        }
+
+
+        // Display products in table
+        function displayProducts(products = null) {
+            const productsToShow = products || getProducts();
+            const tbody = document.getElementById('productsTableBody');
+            
+            if (!tbody) return;
+
+            if (productsToShow.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                            No products found. Add your first product!
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = productsToShow.map(product => {
+                // Determine stock status
+                let stockClass = 'high';
+                let stockText = 'In Stock';
+                if (product.stock === 0) {
+                    stockClass = 'danger';
+                    stockText = 'Out of Stock';
+                } else if (product.stock < 10) {
+                    stockClass = 'medium';
+                    stockText = 'Low Stock';
+                }
+
+                return `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>
+                            <strong>${product.name}</strong>
+                            ${product.description ? `<br><small class="text-muted">${product.description.substring(0, 50)}${product.description.length > 50 ? '...' : ''}</small>` : ''}
+                        </td>
+                        <td><span class="badge bg-secondary">${product.category}</span></td>
+                        <td>
+                            <strong>$${product.price.toFixed(2)}</strong>
+                            ${product.originalPrice && product.originalPrice > product.price ? `<br><small class="text-muted text-decoration-line-through">$${parseFloat(product.originalPrice).toFixed(2)}</small>` : ''}
+                        </td>
+                        <td>
+                            <span class="stock-indicator ${stockClass}">
+                                <i class="bi bi-${product.stock === 0 ? 'x-circle' : product.stock < 10 ? 'exclamation-triangle' : 'check-circle'}"></i>
+                                ${product.stock}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="admin-badge-${stockClass}">${stockText}</span>
+                        </td>
+                        <td>
+                            <div class="admin-actions">
+                                <button class="btn admin-btn-edit btn-sm" onclick="editProduct(${product.id})" title="Edit Product">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn admin-btn-danger btn-sm" onclick="deleteProductConfirm(${product.id})" title="Delete Product">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Add Product Form Handler
+        document.getElementById('addProductForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('productName').value.trim();
+            const category = document.getElementById('productCategory').value;
+            const price = document.getElementById('productPrice').value;
+            const originalPrice = document.getElementById('productOriginalPrice').value || null;
+            const stock = document.getElementById('productStock').value;
+            const description = document.getElementById('productDescription').value.trim();
+            const image = document.getElementById('productImage').value.trim();
+
+            // Get selected sizes
+            const sizes = [];
+            ['S', 'M', 'L', 'XL', 'XXL'].forEach(size => {
+                const checkbox = document.getElementById(`size${size}`);
+                if (checkbox && checkbox.checked) {
+                    sizes.push(size);
+                }
+            });
+
+            // For now, colors will be empty array (can be added later)
+            const colors = [];
+
+            // Validate required fields
+            if (!name || !category || !price || stock === '') {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Add product
+            const result = addProduct(name, category, price, image, description, stock, sizes, colors, originalPrice);
+
+            if (result.success) {
+                showMessage(result.message, 'success');
+                // Reset form
+                document.getElementById('addProductForm').reset();
+                // Reload products
+                displayProducts();
+                loadCategories();
+            } else {
+                showMessage(result.message, 'error');
+            }
+        });
+
+        // Edit Product Function (make it global for onclick handlers)
+        window.editProduct = function(id) {
+            const product = getProductById(id);
+            if (!product) {
+                showMessage('Product not found', 'error');
+                return;
+            }
+
+            // Populate edit form
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('editProductName').value = product.name;
+            document.getElementById('editProductCategory').value = product.category;
+            document.getElementById('editProductPrice').value = product.price;
+            document.getElementById('editProductStock').value = product.stock;
+            document.getElementById('editProductImage').value = product.image || '';
+            document.getElementById('editProductDescription').value = product.description || '';
+
+            // Show modal
+            const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+            editModal.show();
+        };
+
+        // Save Product Changes
+        document.getElementById('saveProductBtn')?.addEventListener('click', function() {
+            const id = parseInt(document.getElementById('editProductId').value);
+            const name = document.getElementById('editProductName').value.trim();
+            const category = document.getElementById('editProductCategory').value;
+            const price = document.getElementById('editProductPrice').value;
+            const stock = document.getElementById('editProductStock').value;
+            const image = document.getElementById('editProductImage').value.trim();
+            const description = document.getElementById('editProductDescription').value.trim();
+
+            if (!name || !category || !price || stock === '') {
+                showMessage('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Update product (sizes and colors will be preserved from existing product)
+            const result = updateProduct(id, name, category, price, image, description, stock);
+
+            if (result.success) {
+                showMessage(result.message, 'success');
+                // Close modal
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+                editModal.hide();
+                // Reload products
+                displayProducts();
+            } else {
+                showMessage(result.message, 'error');
+            }
+        });
+
+        // Delete Product Confirmation (make it global for onclick handlers)
+        window.deleteProductConfirm = function(id) {
+            const product = getProductById(id);
+            if (!product) {
+                showMessage('Product not found', 'error');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete "${product.name}"?\n\nThis action cannot be undone.`)) {
+                const result = deleteProduct(id);
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    displayProducts();
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            }
+        };
+
+        // Search Products
+        document.getElementById('productSearch')?.addEventListener('input', function(e) {
+            const query = e.target.value.trim();
+            if (query === '') {
+                displayProducts();
+            } else {
+                const results = searchProducts(query);
+                displayProducts(results);
+            }
+        });
+
+        // ============================================
+        // ORDER MANAGEMENT FUNCTIONALITY
+        // ============================================
+
+        // Display orders
+        function displayOrders(ordersToShow = null) {
+            const orders = ordersToShow || getAllOrders();
+            const tbody = document.getElementById('ordersTableBody');
+            if (!tbody) return;
+
+            if (orders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                            No orders found.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Sort orders by date (newest first)
+            const sortedOrders = [...orders].sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+
+            tbody.innerHTML = sortedOrders.map(order => {
+                const orderDate = new Date(order.createdAt);
+                const statusClass = order.status.toLowerCase().replace(' ', '-');
+                
+                return `
+                    <tr>
+                        <td><strong>#${order.id}</strong></td>
+                        <td>
+                            <div>${order.customerName || 'N/A'}</div>
+                            <small class="text-muted">${order.customerEmail || 'N/A'}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">${order.itemsCount || 0} items</span>
+                            ${order.items && order.items.length > 0 ? `<br><small class="text-muted">${order.items[0].productName}${order.items.length > 1 ? ` +${order.items.length - 1} more` : ''}</small>` : ''}
+                        </td>
+                        <td><strong>$${order.total?.toFixed(2) || '0.00'}</strong></td>
+                        <td>${orderDate.toLocaleDateString()}<br><small class="text-muted">${orderDate.toLocaleTimeString()}</small></td>
+                        <td><span class="order-status ${statusClass}">${order.status}</span></td>
+                        <td>
+                            <div class="admin-actions">
+                                <button class="btn admin-btn-edit btn-sm" onclick="editOrderStatus(${order.id})" title="Update Status">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                                ${order.status !== 'completed' ? `<button class="btn admin-btn-danger btn-sm" onclick="deleteOrderConfirm(${order.id})" title="Delete Order">
+                                    <i class="bi bi-trash"></i>
+                                </button>` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Edit Order Status (make it global for onclick handlers)
+        window.editOrderStatus = function(orderId) {
+            const order = getOrderById(orderId);
+            if (!order) {
+                showMessage('Order not found', 'error');
+                return;
+            }
+
+            document.getElementById('editOrderId').value = orderId;
+            document.getElementById('editOrderStatus').value = order.status;
+            
+            const statusModal = new bootstrap.Modal(document.getElementById('editOrderStatusModal'));
+            statusModal.show();
+        };
+
+        // Save Order Status
+        document.getElementById('saveOrderStatusBtn')?.addEventListener('click', function() {
+            const orderId = parseInt(document.getElementById('editOrderId').value);
+            const status = document.getElementById('editOrderStatus').value;
+
+            if (!orderId || !status) {
+                showMessage('Please select a valid status', 'error');
+                return;
+            }
+
+            const result = updateOrderStatus(orderId, status);
+
+            if (result.success) {
+                showMessage(result.message, 'success');
+                const statusModal = bootstrap.Modal.getInstance(document.getElementById('editOrderStatusModal'));
+                statusModal.hide();
+                displayOrders(); // Refresh orders
+            } else {
+                showMessage(result.message, 'error');
+            }
+        });
+
+        // Delete Order Confirmation (make it global for onclick handlers)
+        window.deleteOrderConfirm = function(orderId) {
+            const order = getOrderById(orderId);
+            if (!order) {
+                showMessage('Order not found', 'error');
+                return;
+            }
+
+            if (order.status === 'completed') {
+                showMessage('Cannot delete a completed order', 'error');
+                return;
+            }
+
+            if (confirm(`Are you sure you want to delete Order #${order.id}?\n\nThis action cannot be undone.`)) {
+                const result = deleteOrder(orderId);
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    displayOrders();
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            }
+        };
+
+        // Load unique customers for customer filter
+        function loadCustomerFilter() {
+            const orders = getAllOrders();
+            const customers = [...new Set(orders.map(order => order.customerEmail))].sort();
+            const customerFilter = document.getElementById('customerFilter');
+            
+            if (customerFilter) {
+                // Clear existing options except the first one
+                while (customerFilter.options.length > 1) {
+                    customerFilter.remove(1);
+                }
+                
+                // Add customers
+                customers.forEach(email => {
+                    const order = orders.find(o => o.customerEmail === email);
+                    const option = document.createElement('option');
+                    option.value = email;
+                    option.textContent = `${order?.customerName || email} (${email})`;
+                    customerFilter.appendChild(option);
+                });
+            }
+        }
+
+        // Order Filters
+        document.getElementById('orderSearch')?.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const allOrders = getAllOrders();
+            
+            if (query === '') {
+                displayOrders(allOrders);
+                return;
+            }
+
+            const filtered = allOrders.filter(order => {
+                return order.id.toString().includes(query) ||
+                       order.customerEmail.toLowerCase().includes(query) ||
+                       order.customerName.toLowerCase().includes(query) ||
+                       order.status.toLowerCase().includes(query);
+            });
+            
+            displayOrders(filtered);
+        });
+
+        document.getElementById('customerFilter')?.addEventListener('change', function(e) {
+            const customerEmail = e.target.value;
+            const allOrders = getAllOrders();
+            
+            if (customerEmail === '') {
+                displayOrders(allOrders);
+                return;
+            }
+
+            const filtered = allOrders.filter(order => order.customerEmail === customerEmail);
+            displayOrders(filtered);
+        });
+
+        document.getElementById('statusFilter')?.addEventListener('change', function(e) {
+            const status = e.target.value;
+            const allOrders = getAllOrders();
+            
+            if (status === '') {
+                displayOrders(allOrders);
+                return;
+            }
+
+            const filtered = allOrders.filter(order => order.status === status);
+            displayOrders(filtered);
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load categories
+            loadCategories();
+            
+            // Display products
+            displayProducts();
+
+            // Load and display orders
+            loadCustomerFilter();
+            displayOrders();
+        });
+    </script>
+</body>
+
+</html>

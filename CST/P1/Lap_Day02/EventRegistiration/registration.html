@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/reset.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <div><img src="./resources/logo.jfif"></div>
+            <div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="speakers.html">Speakers</a></li>
+                    <li><a href="registration.html">Registration</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+        <main>
+                <h1 style="text-align: center;">"Event Registration"</h1>
+
+   <form action="success.html" method="post">
+<!--section1 personal information-->
+<fieldset>
+<legend>Personal Information</legend>
+<div class="personal">
+<label for="name">full name:</label>
+<input type="text" id ="name" name="name" required maxlength="100">
+<br>
+<label for="e-mail">E-mail:</label>
+<input type="email" id ="e-mail" name="e-mail" required >
+<br>
+<label for="phone">phone:</label>
+<input type="tel" id ="phone" name="phone" required >
+<br>
+<label for="birth">birth_date:</label>
+<input type="date" id ="birth" name="birth" required >
+<br>
+
+<label for="website">website_link:</label>
+<input type="url" id ="website" name="website">
+</div>
+</fieldset>
+
+<!--section1 personal information-->
+
+<fieldset>
+    <legend>Ticket Type</legend>
+        <div class="additional">
+            <input type="radio" name="ticket" id="Bird" value="Early Bird Pass ($299)">
+
+    <label for="Bird">Early Bird Pass ($299)</label>
+        </div>
+    <br>
+        <div class="additional">
+            <input type="radio" name="ticket" id="Standard" value="Standard 399">
+
+    <label for="Standard">Standard Pass ($399)</label>
+        </div>
+    <br>
+        <div class="additional">
+            <input type="radio" name="ticket" id="VIP" value="VIP ($599)">
+
+    <label for="VIP">VIP Pass ($599)</label>
+        </div>
+    <br>
+        <div class="additional">
+            <input type="radio" name="ticket" id="Student" value="Student ($149)">
+
+    <label for="Student">Student Pass ($149)</label>
+        </div>
+</fieldset>
+<!--Workshop Selection-->
+<fieldset>
+
+    <legend>Workshop Selection</legend>
+        <div class="additional">
+            <input type="checkbox" name="Workshop" id="react" value="React">
+
+    <label for="react">Advanced React Patterns</label>
+        </div>
+<br>
+    <div class="additional">
+        <input type="checkbox" name="Workshop" id="back" value="Backend">
+
+    <label for="back">Backend Architecture</label>
+    </div>
+<br>
+    <div class="additional">
+        <input type="checkbox" name="Workshop" id="ui" value="Design">
+
+    <label for="ui">UI/UX Design</label>
+    </div>
+<br>
+    <div class="additional">
+        <input type="checkbox" name="Workshop" id="cloud" value="Cloud">
+
+    <label for="cloud">Cloud Deployment</label>
+    </div>
+<br>
+    <div class="additional">
+        <input type="checkbox" name="Workshop" id="ai" value="ai">
+
+    <label for="ai">AI and Machine Learning</label>
+    </div>
+</fieldset>
+
+<!--Meal Preference-->
+<fieldset>
+    <legend>Meal Preference</legend>
+
+    <label for="meal">Choose your meal:</label>
+    <select id="meal" name="meal" required>
+        <option value="">-- Select Meal Preference --</option>
+
+        <optgroup label="Standard Options">
+            <option value="regular">Regular</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+        </optgroup>
+
+        <optgroup label="Allergy Options">
+            <option value="gluten-free">Gluten-Free</option>
+            <option value="nut-free">Nut-Free</option>
+        </optgroup>
+    </select>
+</fieldset>
+
+<!--Accessibility Needs-->
+
+<fieldset>
+    <legend>Accessibility Needs</legend>
+    <div class="additional">
+        <input type="checkbox" name="accessibility" id="Wheelchair">
+
+    <label for="Wheelchair">Wheelchair accessibility</label>
+    </div>  
+<br>
+    <div class="additional">
+        <input type="checkbox" name="accessibility" id="Sign">
+
+    <label for="Sign">Sign language interpreter</label>
+    </div>
+
+<br>
+    <div class="additional">
+        <input type="checkbox" name="accessibility" id="Hearing">
+
+    <label for="Hearing">Hearing assistance</label>
+    </div>
+</fieldset>
+
+<!--Additional Information-->
+<fieldset>
+    <legend>Additional Information</legend>
+
+    <label for="Emergency-name">Emergency Contact Name:</label>
+    <input type="text" name="Emergency-name" id="Emergency-name">
+<br><br>
+    <label for="Emergency-phone">Emergency Contact Phone:</label>
+    <input type="tel" id="Emergency-phone" name="Emergency-phone">
+<br><br>
+<div class="additional">
+    <label for="requests">Special Requests:</label>
+    <textarea id="requests" rows="3" cols="50" name="requests"></textarea>
+    </div>
+</fieldset>
+<!--Terms and Agreement-->
+
+<fieldset>
+    <legend>Terms and Agreement</legend>
+
+    <label>
+        <input type="checkbox" required>
+        I agree to 
+        <a href="terms.html" target="_blank">terms and conditions</a>
+    </label>
+
+    <label>
+        <input type="checkbox">
+        Subscribe to newsletter
+    </label>
+</fieldset>
+
+
+<fieldset>
+        <legend>Actions</legend>
+
+        <button class="button"type="submit">Complete Registration</button>
+        <br>
+        <button class="button"type="reset">Clear Form</button>
+        <br>
+        <button class="button"type="button">Save Draft</button>
+    </fieldset>
+
+   </form>
+        </main>
+    <footer class="footer">
+        <time datetime="2026">2026</time>
+        <li style="list-style: none;"><strong>E-mail:</strong><a target="blank"
+                href="https://mail.google.com/mail/?view=cm&to=msyd32831@gmail.com">
+                mohamedCSDev
+            </a></li>
+        <ul class="social-links">
+
+
+            <li> <a href="https://www.facebook.com/" target="_blank">
+                    <img src="./resources/facebock.png" alt=""></a> <br>
+            </li>
+            <li> <a href="https://www.linkedin.com/feed/" target="_blank"><img src="./resources/linked-in.png"
+                        alt=""></a>
+            </li>
+            <li> <a href="https://www.instagram.com/" target="_blank"><img src="./resources/instagram.jfif" alt=""></a>
+            </li>
+        </ul>
+
+        <p class="copyright">Copyright &copy; All Rights Reserved 2022</p>
+    </footer>
+</body>
+
+</html>

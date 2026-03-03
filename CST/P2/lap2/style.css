@@ -1,0 +1,118 @@
+li {
+  list-style: none;
+  /*to make  element next to next and control with height ,width and padding*/
+  display: inline-block;
+}
+.nav {
+  width: 100%;
+  height: 100px;
+  background-color: #555555;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-ul {
+    display: flex; gap: 30px;
+}
+
+li a {
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+li a:hover {
+  background-color: #ff9800; 
+}
+.nav-ul li a i {
+  color: white;               
+  font-size: 24px;
+  transition: color 0.3s ease; 
+}
+
+
+.nav-ul li a:hover i {
+  color: black;               
+}
+.chip{
+    height: 50px;
+    background-color: #f0f1f1;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 20px;
+}
+#info{
+display: none;
+}
+.container{
+    margin: 18px;
+    border: #555555 solid 1px;
+}
+.contact{
+    display: flex;
+    background-color:#dadada ;
+    
+
+}
+.nameAuth{
+    width: 60px;
+    padding: 18px 8px;
+    background-color: #686c62;
+color: #eef1e8;
+    border-radius: 8px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    height: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 8px;
+}
+.about{
+    display: flex;
+    gap: 24px ;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 18px;
+}
+.about p {
+    
+    column-count: 1; 
+    
+    column-gap: 8px; 
+    
+    column-rule: 1px solid #ccc; 
+    text-align: justify;
+}
+.about img{
+    border: #f0f1f1 3px solid;
+}
+
+.gallery-container {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+}
+
+.photo {
+    overflow: hidden; 
+    border: 2px solid #ddd;
+}
+
+.photo img {
+    width: 250px;
+    height: 150px;
+    display: block;
+    
+    transition: transform 0.5s ease; 
+}
+
+.photo img:hover {
+    
+    transform: scale(1.2); 
+}

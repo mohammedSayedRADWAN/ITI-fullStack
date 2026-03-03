@@ -1,0 +1,134 @@
+:root {
+    --primary-color: #f2e154;
+    --text-dark: #1f2937;
+    --bg-light: #f9fafb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container الأساسي بنظام الـ 16 عمود */
+.main-cv-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+}
+
+/* Header */
+.cv-header {
+    grid-column: span 16;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 30px;
+}
+
+.cv-header h1 {
+    font-size: 5vw; /* Viewport unit */
+    color: var(--text-dark);
+}
+
+.logo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 5px solid white;
+}
+/* تحديد حجم الفيديو ومنعه من الخروج عن السيطرة */
+#myVideo {
+    width: 100%;       /* ياخد عرض المكان اللي هو فيه بس */
+    max-width: 300px;  /* أقصى عرض ليه عشان ميبقاش ضخم */
+    height: auto;      /* يحافظ على التناسب */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Main Content Area */
+.cv-content {
+    grid-column: span 16;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+}
+
+.right-column {
+    grid-column: span 11;
+    padding: 30px;
+}
+
+.left-column {
+    grid-column: span 5;
+    padding: 30px;
+    background-color: #fcfcfc;
+    border-left: 1px solid #eee;
+}
+
+/* Typography & Elements */
+h3 {
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.goal {
+    margin-bottom: 20px;
+}
+
+.goal time {
+    font-weight: bold;
+    color: #2563eb;
+    margin-right: 15px;
+}
+
+.skill-bar {
+    background: #eee;
+    height: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress { height: 100%; }
+
+/* Footer */
+.cv-footer {
+    grid-column: span 16;
+    display: flex;
+    height: 10px;
+}
+
+.color-bar { flex: 1; }
+.red { background: red; }
+.orange { background: orange; }
+.indigo { background: indigo; }
+
+/* --- Responsive (Media Queries) --- */
+
+@media screen and (max-width: 992px) {
+    .right-column, .left-column {
+        grid-column: span 16; /* تحويلهم لصفوف فوق بعض */
+    }
+    .left-column { border-left: none; border-top: 2px solid #eee; }
+}
+
+@media screen and (max-width: 600px) {
+    .cv-header { flex-direction: column; text-align: center; }
+    .logo { display: none; } /* طلب الـ Lab */
+    .cv-header h1 { font-size: 10vw; }
+}

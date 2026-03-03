@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //task4
+const UrlParams=new URLSearchParams(window.location.search)
+const userName=UrlParams.get('userName')
+console.log(userName);
+
+if (userName) {
+    document.write(`<h1 style="font-size: 20px; color: green;"><b>Welcome  ${userName} </b></h1>`)
+}
+
+    </script>
+</body>
+</html>

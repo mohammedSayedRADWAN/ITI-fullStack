@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Day 3 Lab</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= Drag & Drop ================= -->
+<h3>Drag & Drop</h3>
+Score: <span id="score">0</span>
+
+<div id="dropZone">Letter A</div>
+
+<div class="item" draggable="true" data-letter="A">A</div>
+<div class="item" draggable="true" data-letter="C">C</div>
+<div class="item" draggable="true" data-letter="a">a</div>
+
+<hr>
+
+<!-- ================= SVG Face ================= -->
+<h3>SVG Face</h3>
+
+<svg width="300" height="300">
+  <circle cx="150" cy="150" r="100" fill="#f5cfa0"/>
+
+  <circle cx="120" cy="130" r="10" fill="black" class="part" data-name="Eye"/>
+  <circle cx="180" cy="130" r="10" fill="black" class="part" data-name="Eye"/>
+
+  <ellipse cx="150" cy="160" rx="7" ry="12" fill="brown" class="part" data-name="Nose"/>
+
+  <ellipse cx="150" cy="190" rx="30" ry="10" fill="red" class="part" data-name="Mouth"/>
+</svg>
+
+<div id="tooltip"></div>
+
+<hr>
+
+<!-- ================= Canvas ================= -->
+<h3>Canvas</h3>
+
+<canvas id="canvas" width="400" height="400" style="border:1px solid black"></canvas>
+
+<hr>
+
+<!-- ================= Geolocation ================= -->
+<h3>Geolocation</h3>
+<button onclick="getLocation()">Get My Location</button>
+
+<script>
+/* -------- Drag & Drop + Session Storage -------- */
+let score = sessionStorage.getItem("score") || 0;
+document.getElementById("score").textContent = score;
+
+let dragged = "";
+
+document.querySelectorAll(".item").forEach(item=>{
+  item.addEventListener("dragstart",e=>{
+    dragged = e.target.dataset.letter;
+  });
+});
+
+const dropZone = document.getElementById("dropZone");
+
+dropZone.addEventListener("dragover",e=>e.preventDefault());
+
+dropZone.addEventListener("drop",()=>{
+  if(dragged==="A" || dragged==="a"){
+    dropZone.style.background="green";
+    score++;
+    sessionStorage.setItem("score",score);
+    document.getElementById("score").textContent = score;
+  }else{
+    dropZone.style.background="#ccc";
+  }
+});
+
+/* -------- SVG Hover + Tooltip -------- */
+const tooltip = document.getElementById("tooltip");
+
+document.querySelectorAll(".part").forEach(p=>{
+  let oldColor;
+  p.addEventListener("mouseover",e=>{
+    oldColor = e.target.getAttribute("fill");
+    e.target.setAttribute("fill","blue");
+    tooltip.style.display="block";
+    tooltip.textContent = e.target.dataset.name;
+  });
+
+  p.addEventListener("mousemove",e=>{
+    tooltip.style.left = e.pageX+10+"px";
+    tooltip.style.top = e.pageY+10+"px";
+  });
+
+  p.addEventListener("mouseout",e=>{
+    e.target.setAttribute("fill",oldColor);
+    tooltip.style.display="none";
+  });
+});
+
+/* -------- Canvas -------- */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let draw = false;
+let erase = false;
+
+function drawFace(smile,scale=1){
+  ctx.clearRect(0,0,400,400);
+  ctx.save();
+  ctx.scale(scale,scale);
+
+  ctx.beginPath();
+  ctx.arc(200,200,80,0,Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(170,180,5,0,Math.PI*2);
+  ctx.arc(230,180,5,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.beginPath();
+  if(smile)
+    ctx.arc(200,210,40,0,Math.PI);
+  else
+    ctx.arc(200,250,40,Math.PI,0);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+drawFace(false);
+
+canvas.addEventListener("mousedown",e=>{
+  if(e.button===0){
+    drawFace(true,1.2);
+    draw=true;
+    erase=false;
+  }
+  if(e.button===2){
+    draw=true;
+    erase=true;
+  }
+});
+
+canvas.addEventListener("mouseup",()=>{
+  drawFace(false);
+  draw=false;
+});
+
+canvas.addEventListener("mousemove",e=>{
+  if(!draw) return;
+  ctx.fillStyle = erase ? "white" : "black";
+  ctx.fillRect(e.offsetX,e.offsetY,4,4);
+});
+
+canvas.addEventListener("contextmenu",e=>e.preventDefault());
+
+/* -------- Geolocation -------- */
+function getLocation(){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    let lat = pos.coords.latitude;
+    let lng = pos.coords.longitude;
+    window.open(`https://www.google.com/maps?q=${lat},${lng}`);
+  });
+}
+</script>
+
+</body>
+</html>

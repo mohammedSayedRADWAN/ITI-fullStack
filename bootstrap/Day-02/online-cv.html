@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online CV - Bootstrap 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f1f1f1; font-family: "Roboto", sans-serif; }
+        .cv-card { border: none; border-radius: 0; box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16); }
+        .text-teal { color: #009688 !important; }
+        .bg-teal { background-color: #009688 !important; }
+        .progress { height: 18px; border-radius: 10px; background-color: #f1f1f1; }
+        .progress-bar { border-radius: 10px; }
+        footer { background-color: #009688; color: white; padding: 60px 0; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4 mb-5">
+    <div class="row g-4">
+        
+        <div class="col-lg-4">
+            <div class="card cv-card">
+                <div class="position-relative">
+                    <img src="https://www.w3schools.com/w3images/avatar_hat.jpg" class="card-img-top" alt="Jane Doe">
+                    <h2 class="position-absolute bottom-0 start-0 p-3 text-white fw-light" style="background: rgba(0,0,0,0.2); width: 100%;">Jane Doe</h2>
+                </div>
+                <div class="card-body">
+                    <p><i class="bi bi-briefcase-fill text-teal me-3"></i>Designer</p>
+                    <p><i class="bi bi-house-fill text-teal me-3"></i>London, UK</p>
+                    <p><i class="bi bi-envelope-fill text-teal me-3"></i>ex@mail.com</p>
+                    <p><i class="bi bi-telephone-fill text-teal me-3"></i>1224455554</p>
+                    <hr>
+
+                    <h5 class="fw-bold"><i class="bi bi-asterisk text-teal me-2"></i>Skills</h5>
+                    <p class="mb-1 mt-3">Adobe Photoshop</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 90%">90%</div>
+                    </div>
+                    <p class="mb-1">Photography</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 80%">80%</div>
+                    </div>
+                    <p class="mb-1">Illustrator</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 75%">75%</div>
+                    </div>
+                    <p class="mb-1">Media</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 50%">50%</div>
+                    </div>
+                    <br>
+
+                    <h5 class="fw-bold"><i class="bi bi-globe text-teal me-2"></i>Languages</h5>
+                    <p class="mb-1 mt-3">English</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 100%"></div>
+                    </div>
+                    <p class="mb-1">Spanish</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 55%"></div>
+                    </div>
+                    <p class="mb-1">German</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-teal" style="width: 25%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            
+            <div class="card cv-card p-4 mb-4">
+                <h2 class="text-secondary fw-light mb-4"><i class="bi bi-suitcase-lg-fill text-teal me-3"></i>Work Experience</h2>
+                
+                <div class="mb-4">
+                    <h5 class="fw-bold opacity-75">Front End Developer / w3schools.com</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>Jan 2015 - <span class="badge bg-teal">Current</span></p>
+                    <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempera salute es et odio, unde dolcremque repellendes lure, iste.</p>
+                    <hr>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold opacity-75">Web Designer / something.com</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>Mar 2012 - Dec 2014</p>
+                    <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempera ealute ee et odio, unde dolcremque repellendes iurc, iste.</p>
+                    <hr>
+                </div>
+
+                <div>
+                    <h5 class="fw-bold opacity-75">Graphic Designer / designsomething.com</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>Jun 2010 - Mar 2012</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+
+            <div class="card cv-card p-4">
+                <h2 class="text-secondary fw-light mb-4"><i class="bi bi-patch-check-fill text-teal me-3"></i>Education</h2>
+                
+                <div class="mb-4">
+                    <h5 class="fw-bold opacity-75">W3Schools.com</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>Forever</p>
+                    <p>Web Development! All I need to know in one place</p>
+                    <hr>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="fw-bold opacity-75">London Business School</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>2013 - 2015</p>
+                    <p>Master Degree</p>
+                    <hr>
+                </div>
+
+                <div>
+                    <h5 class="fw-bold opacity-75">School of Coding</h5>
+                    <p class="text-teal"><i class="bi bi-calendar-event-fill me-2"></i>2010 - 2013</p>
+                    <p>Bachelor Degree</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Find me on social media.</p>
+    <div class="fs-4 mb-3">
+        <i class="bi bi-facebook mx-1"></i>
+        <i class="bi bi-instagram mx-1"></i>
+        <i class="bi bi-snapchat mx-1"></i>
+        <i class="bi bi-pinterest mx-1"></i>
+        <i class="bi bi-twitter mx-1"></i>
+        <i class="bi bi-linkedin mx-1"></i>
+    </div>
+    <p class="small">Powered by <a href="#" class="text-white text-decoration-underline">w3.css</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

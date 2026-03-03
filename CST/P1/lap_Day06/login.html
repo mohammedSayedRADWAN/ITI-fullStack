@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="welcome.html" method="get">
+     <label for="userName"> userNme: </label>
+     <input type="text" id="userName" name="userName">
+
+     <label for="password">password:</label>
+     <input type="password" id="password" name="password">
+     <br><br>
+     
+     <input type="submit" value="Login">
+
+    </form>
+    <script>const userName=document.getElementById("userName");
+console.log(userName);
+
+userName.onkeypress=(event)=>{
+    //Ascii code of numbers start with 48 and end with 57
+if (event.keyCode >= 48 && event.keyCode <= 57) {
+    alert("numbers not allowed");
+    event.preventDefault();
+}
+}</script>
+</body>
+</html>

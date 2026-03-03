@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game_area{
+            background-color: burlywood;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            border: solid 2px black;
+            margin: 20px 50px;
+        }
+        #basket{
+            background-color: darkblue;
+            width: 80px;
+            height: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 200px;
+            border-radius: 50px;
+        }
+        
+
+    .ball-template {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        position: absolute;
+        display: none; 
+    }
+    
+    
+    .blue-ball { background: blue; display: block; }
+    .gold-ball { background: gold; display: block; border: 2px solid orange; }
+    .red-ball { background: red; display: block; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Score <span id="score">0</span></h2>
+    <!--parent-->
+    <div id="game_area">
+        <!--child -->
+        <div id="basket"></div>
+        <div id="ballPrototype" class="ball-template"></div>
+    </div>
+    <button id="startBtn" style="padding: 10px 20px; font-size: 18px; cursor: pointer; display: block; margin: 10px auto;">ابدأ اللعبة</button>
+    <script src="app.js"></script>
+</body>
+</html>

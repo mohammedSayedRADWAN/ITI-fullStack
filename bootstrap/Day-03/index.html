@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskly Pro Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="py-5" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Simple, Transparent Pricing</h2>
+                <p class="text-muted">Choose the plan that works best for your team</p>
+                
+                <div class="d-flex justify-content-center align-items-center mt-4">
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                        <label class="btn btn-primary" for="btnradio1">Monthly</label>
+                      
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Annually <span class="badge bg-success ms-1">Save 20%</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-4">
+                    <div class="card pricing-card h-100 p-4">
+                        <div class="card-body">
+                            <h5 class="fw-bold">Starter</h5>
+                            <h2 class="fw-bold display-5 my-3">$9<span class="fs-5 text-muted fw-normal">/mo</span></h2>
+                            <p class="text-muted mb-4">Perfect for small teams</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Up to 10 users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>5 GB storage</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Basic integrations</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Email support</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-custom">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card pricing-card popular h-100 p-0 shadow-sm">
+                        <div style="background-color: #4361ee; height: 15px;"></div>
+                        <div class="text-center mt-2">
+                             <span class="badge bg-warning text-dark">MOST POPULAR</span>
+                        </div>
+                        <div class="card-body p-4 pt-2">
+                            <h5 class="fw-bold">Professional</h5>
+                            <h2 class="fw-bold display-5 my-3">$29<span class="fs-5 text-muted fw-normal">/mo</span></h2>
+                            <p class="text-muted mb-4">For growing businesses</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Up to 50 users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>50 GB storage</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>All integrations</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Priority support</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Advanced analytics</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-primary-custom">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card pricing-card h-100 p-4">
+                        <div class="card-body">
+                            <h5 class="fw-bold">Enterprise</h5>
+                            <h2 class="fw-bold display-5 my-3">Custom</h2>
+                            <p class="text-muted mb-4">For large organizations</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Unlimited users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Unlimited storage</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Custom integrations</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>24/7 phone support</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Dedicated manager</li>
+                            </ul>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-custom">Contact Sales</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-5">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <li class="page-item "><a class="page-link" href="#">1</a></li>
+                      <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <footer class="footer-dark py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white mb-3"><i class="bi bi-diagram-3-fill me-2 text-primary"></i>Taskly Pro</h5>
+                    <p class="small">The ultimate project management solution for modern teams.</p>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-secondary">ISO 27001</span>
+                        <span class="badge bg-secondary">SOC 2</span>
+                        <span class="badge bg-secondary">GDPR</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h6 class="text-white fw-bold mb-3">Product</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#">Features</a></li>
+                        <li class="mb-2"><a href="#">Pricing</a></li>
+                        <li class="mb-2"><a href="#">Integrations</a></li>
+                        <li class="mb-2"><a href="#">API <span class="badge bg-primary ms-1" style="font-size:0.6rem">New</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h6 class="text-white fw-bold mb-3">Company</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                        <li class="mb-2"><a href="#">Careers <span class="badge bg-success ms-1" style="font-size:0.6rem">Hiring</span></a></li>
+                        <li class="mb-2"><a href="#">Press Kit</a></li>
+                        <li class="mb-2"><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <h6 class="text-white fw-bold mb-3">Resources</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#">Documentation</a></li>
+                        <li class="mb-2"><a href="#">Blog</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                        <li class="mb-2"><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="d-flex justify-content-between small text-muted">
+                <div>&copy; 2024 Taskly Pro. All rights reserved.</div>
+                <div>
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="fab">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

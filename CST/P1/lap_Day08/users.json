@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Ahmed",
+      "last_name": "Ali",
+      "avatar": "https://via.placeholder.com/100"
+    },
+    {
+      "id": 2,
+      "first_name": "Sara",
+      "last_name": "Mohamed",
+      "avatar": "https://via.placeholder.com/100"
+    },
+    {
+      "id": 3,
+      "first_name": "Omar",
+      "last_name": "Hassan",
+      "avatar": "https://via.placeholder.com/100"
+    }
+  ]
+}
