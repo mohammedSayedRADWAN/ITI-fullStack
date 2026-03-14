@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1773144642202,
+    "title": "My First Post",
+    "content": "This is a post from my Node.js Lab!",
+    "createdAt": "3/10/2026, 2:10:42 PM"
+  },
+  {
+    "id": 1773147831816,
+    "title": "My Second Post",
+    "content": "This is a post from my Node.js Lab!",
+    "createdAt": "3/10/2026, 3:03:51 PM"
+  },
+  {
+    "id": 1773147869902,
+    "title": "My Third Post",
+    "content": "This is a post from my Node.js Lab after apdated!",
+    "createdAt": "3/10/2026, 3:04:29 PM",
+    "updatedAt": "3/10/2026, 3:06:27 PM"
+  }
+]
