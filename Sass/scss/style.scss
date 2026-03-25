@@ -1,0 +1,55 @@
+@use 'var';
+@use 'mixins';
+@use 'buttons';
+@use "sass:math";
+
+// Nesting
+body {
+  font-family: Arial;
+
+  header {
+    background: var.$primary-color;
+    color: white;
+    padding: var.$padding;
+  }
+}
+
+// Using mixins
+.container {
+  @include mixins.flex-center;
+  height: 200px;
+}
+
+// Control Directive: @if
+.box {
+  $theme: light;
+
+  @if $theme == light {
+    background: #f4f4f4;
+  } @else {
+    background: #222;
+    color: white;
+  }
+}
+
+// Loop: @for
+@for $i from 1 through 3 {
+  .col-#{$i} {
+    width: math.div(100%, $i)
+  }
+}
+
+// Loop: @each
+$colors: "red", "green", "blue";
+
+@each $color in $colors {
+  .text-#{$color} {
+    color: $color;
+  }
+}
+
+// Function usage
+.card {
+  background: var.$secondary-color;
+  padding: 20px;
+}

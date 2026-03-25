@@ -1,0 +1,17 @@
+.btn-secondary, .btn-primary {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: blue;
+  color: white;
+}
+
+.btn-secondary {
+  background: gray;
+  color: white;
+}
+
+/*# sourceMappingURL=buttons.css.map */

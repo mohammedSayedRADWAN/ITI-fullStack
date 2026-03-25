@@ -1,0 +1,66 @@
+.btn-secondary, .btn-primary {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: blue;
+  color: white;
+}
+
+.btn-secondary {
+  background: gray;
+  color: white;
+}
+
+body {
+  font-family: Arial;
+}
+body header {
+  background: #3498db;
+  color: white;
+  padding: 16px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.box {
+  background: #f4f4f4;
+}
+
+.col-1 {
+  width: 100%;
+}
+
+.col-2 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 33.3333333333%;
+}
+
+.text-red {
+  color: "red";
+}
+
+.text-green {
+  color: "green";
+}
+
+.text-blue {
+  color: "blue";
+}
+
+.card {
+  background: #2ecc71;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */

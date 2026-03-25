@@ -1,0 +1,17 @@
+%btn-base {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  @extend %btn-base;
+  background: blue;
+  color: white;
+}
+
+.btn-secondary {
+  @extend %btn-base;
+  background: gray;
+  color: white;
+}

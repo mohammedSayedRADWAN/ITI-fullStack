@@ -7,10 +7,9 @@ const PORT = 3000;
 const DB_PATH = path.join(__dirname, 'data', 'comments.json');
 
 // --- Middleware ---
-app.use(express.json()); // Bonus: لتجهيز الـ JSON اللي جاي في الـ Body
-app.use(express.static('public')); // Bonus: عشان يشوف ملفات الـ HTML والـ CSS
+app.use(express.json()); 
+app.use(express.static('public')); 
 
-// دالة مساعدة للقراءة والكتابة
 const getComments = async () => JSON.parse(await fs.readFile(DB_PATH, 'utf8'));
 const saveComments = async (data) => await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
 
@@ -38,7 +37,6 @@ app.get('/comments/:id', async (req, res) => {
 // 4. POST - Create new comment
 app.post('/comments', async (req, res) => {
     const { author, body } = req.body;
-    // Bonus: Validation
     if (!author || !body) return res.status(400).json({ message: "Author and body are required" });
 
     const comments = await getComments();
