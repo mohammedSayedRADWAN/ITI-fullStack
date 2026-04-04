@@ -1,0 +1,68 @@
+/* الخلفية العامة للموقع لكسر بياض الصفحة */
+:host {
+    display: block;
+    background-color: #f4f7f6; /* رمادي مائل للأزرق هادي جداً */
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* تنسيق الـ Header (الجزء العلوي) */
+.store-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* تدرج أزرق ملكي */
+    color: white;
+    border-radius: 0 0 50px 50px; /* انحناء سفلي عصري */
+    margin-bottom: 40px;
+}
+
+/* تنسيق كروت المنتجات */
+.product-card {
+    border: none;
+    border-radius: 20px;
+    background: #ffffff;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* تنسيق الصور داخل الكروت */
+.img-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-img {
+    max-height: 180px;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
+
+/* تنسيق شريط البحث والـ Dropdown */
+.filter-section {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+}
+
+/* الألوان الخاصة بحالة المخزن (Badges) */
+.badge-custom {
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-weight: 500;
+}

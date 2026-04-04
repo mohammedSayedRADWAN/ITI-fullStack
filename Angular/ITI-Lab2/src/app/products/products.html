@@ -1,0 +1,45 @@
+<div class="store-header p-5 text-center shadow">
+  <img [src]="storeInfo.logo" class="rounded-circle border border-4 border-white mb-3" style="width: 100px;">
+  <h1 class="fw-bold">{{ storeInfo.name }}</h1> 
+  <p class="opacity-75">Welcome back, <strong>{{ storeOwner }}</strong></p> 
+</div>
+
+<div class="container">
+  <div class="filter-section mb-5 row g-3 align-items-end">
+    <div class="col-md-7">
+      <label class="form-label fw-bold text-muted">Search Products</label>
+      <input type="text" [(ngModel)]="searchName" class="form-control" placeholder="What are you looking for?"> 
+    </div>
+    <div class="col-md-5">
+      <label class="form-label fw-bold text-muted">Category</label>
+      <select class="form-select" [(ngModel)]="selectedCatID"> 
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let prd of productList">
+      <div class="product-card card h-100 shadow-sm" *ngIf="(selectedCatID==0 || prd.categoryId==selectedCatID) && prd.name.toLowerCase().includes(searchName.toLowerCase())">
+        <div class="img-container">
+          <img [src]="prd.img" class="product-img" [alt]="prd.name"> 
+        </div>
+        <div class="card-body text-center p-4">
+          <h5 class="fw-bold">{{ prd.name }}</h5>
+          <h4 class="text-primary mb-3">{{ prd.price | currency:'EGP' }}</h4>
+          
+          <div [ngSwitch]="prd.quantity" class="mb-4">
+            <span *ngSwitchCase="0" class="badge bg-danger badge-custom">Sold Out</span> 
+            <span *ngSwitchCase="1" class="badge bg-warning text-dark badge-custom">Only 1 Left!</span>
+            <span *ngSwitchDefault class="badge bg-success badge-custom">Available ({{prd.quantity}})</span>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary w-100 py-2 fw-bold" [disabled]="prd.quantity==0" (click)="buy(prd)">Buy Now</button> 
+            <button class="btn btn-outline-secondary py-2" (click)="showDetails(prd)">Info</button> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
