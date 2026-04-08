@@ -1,0 +1,23 @@
+.product-detail {
+  border-radius: 20px;
+  border: none;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.product-detail:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.badge {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .product-detail .row g-0 div:first-child {
+    height: 300px;
+  }
+}

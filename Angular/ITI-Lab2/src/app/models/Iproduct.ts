@@ -1,8 +1,14 @@
+import { ICategory } from "./icategory";
+
+/**
+ * [Day 6 Task 1] Product Interface
+ * Updated to match the Platzi Fake Store API schema.
+ */
 export interface IProduct {
     id: number;
-    name: string;
-    quantity: number;
+    title: string;
     price: number;
-    img: string;
-    categoryId: number;
+    description: string;
+    images: string[];
+    category: ICategory;
 }

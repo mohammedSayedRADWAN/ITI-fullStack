@@ -1,16 +1,16 @@
 /* الخلفية العامة للموقع لكسر بياض الصفحة */
 :host {
     display: block;
-    background-color: #f4f7f6; /* رمادي مائل للأزرق هادي جداً */
+    background-color: #f8fafc; /* Neutral Slate-50: Pure professional gray */
     min-height: 100vh;
     padding-bottom: 50px;
 }
 
 /* تنسيق الـ Header (الجزء العلوي) */
 .store-header {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* تدرج أزرق ملكي */
+    background: linear-gradient(135deg, #020617 0%, #1e293b 100%); /* Charcoal/Midnight Black */
     color: white;
-    border-radius: 0 0 50px 50px; /* انحناء سفلي عصري */
+    border-radius: 0 0 50px 50px;
     margin-bottom: 40px;
 }
 
@@ -26,6 +26,10 @@
 .product-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.product-card:hover .card-img-top {
+  transform: scale(1.1);
 }
 
 /* تنسيق الصور داخل الكروت */
@@ -66,3 +70,13 @@
     border-radius: 50px;
     font-weight: 500;
 }
+
+/* New Modern E-commerce Styles */
+.transition-all { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important; }
+.object-fit-contain { object-fit: contain; }
+.transition-zoom { transition: transform 0.5s ease; }
+.product-card:hover .transition-zoom { transform: scale(1.1); }
+.letter-spacing-1 { letter-spacing: 1px; }
+.tiny { font-size: 0.7rem; }
+.fw-extrabold { font-weight: 800; }

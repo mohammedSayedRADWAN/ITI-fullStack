@@ -1,53 +1,93 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // مهم عشان الـ Switch والـ For [cite: 28, 31]
-import { FormsModule } from '@angular/forms'; // مهم عشان الـ Two-way binding [cite: 34]
+import { Component, Input, OnChanges, SimpleChanges, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms'; 
 import { Store } from '../models/store';
 import { IProduct } from '../models/Iproduct';
 import { ICategory } from '../models/icategory'; 
+import { ProductCardDirective } from '../directives/product-card.directive';
+import { CreditCardFormatPipe } from '../pipes/credit-card-format.pipe';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductsService } from '../services/products.service';
+import { Observable, map } from 'rxjs';
 
+/**
+ * [Day 6 Task 1] Unified Products List
+ * Integrates Real-time Platzi API fetching and dynamic rendering.
+ */
 @Component({
-  selector: 'app-products',
+  selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProductCardDirective, CreditCardFormatPipe, ProductDetailComponent],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
-export class Products {
-  // (1) Object of Store class [cite: 8]
-  storeInfo: Store = new Store('ITI Tech Store', ['Cairo', 'Smart Village'], 'https://placehold.co/100x100?text=Logo');
-  
-  // (2) Property StoreOwner [cite: 9]
+export class ProductsListComponent implements OnInit, OnChanges {
+  // Store info for interpolation [Lab 3]
+  storeInfo: Store = new Store('ITI Premium Store', ['Cairo', 'Smart Village'], 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=100&h=100&auto=format&fit=crop');
   storeOwner: string = 'Mohammed Sayed';
+  currentDate: Date = new Date();
+  ccNumber: string = '1234567812345678';
+  
+  // Selection state
+  selectedProduct: any | null = null;
+  
+  // [Lab 6 Task 1] Real API products observable stream
+  products$: Observable<any[]>;
+  private productsService = inject(ProductsService);
 
-  // (3) Product List (Array of IProduct) [cite: 25]
-  productList: IProduct[] = [
-    { id: 1, name: 'iPhone 15', quantity: 10, price: 50000, img: 'https://placehold.co/200', categoryId: 1 },
-    { id: 2, name: 'Samsung S24', quantity: 1, price: 45000, img: 'https://placehold.co/200', categoryId: 1 },
-    { id: 3, name: 'Dell Laptop', quantity: 0, price: 35000, img: 'https://placehold.co/200', categoryId: 2 },
-    { id: 4, name: 'HP Laptop', quantity: 2, price: 32000, img: 'https://placehold.co/200', categoryId: 2 }
-  ];
+  @Input() searchFilter: string = '';
+  private _selectedCatID: number = 0;
+  get selectedCatID(): number { return this._selectedCatID; }
+  set selectedCatID(val: number) {
+    this._selectedCatID = Number(val);
+    this.refreshProducts();
+  }
 
-  // (4) Search property for two-way binding [cite: 34]
-  searchName: string = '';
+  constructor() {
+    // Initial data stream setup
+    this.products$ = this.productsService.getAllProducts();
+  }
 
-  // (5) Buy button logic [cite: 32]
-  buy(prd: IProduct) {
-    if (prd.quantity > 0) {
-      prd.quantity--;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchFilter']) {
+      this.refreshProducts();
     }
   }
 
-  // (6) Details button logic [cite: 33]
-  showDetails(prd: IProduct) {
-    alert(`Product Name: ${prd.name}\nAvailable Quantity: ${prd.quantity}`);
+  ngOnInit(): void {
+    this.refreshProducts();
   }
-  categories: ICategory[] = [
-  { id: 0, name: 'All' },
-  { id: 1, name: 'Phones' },
-  { id: 2, name: 'Laptops' }
-];
 
-selectedCatID: number = 0;
+  // [Lab 6 Task 1] Dynamic fetching logic
+  private refreshProducts() {
+    // We can filter locally for simplicity or use the search API if term is present.
+    // For the "List" view, we keep it simple.
+    this.products$ = this.productsService.getAllProducts().pipe(
+      map(items => items.filter(item => 
+        (this.selectedCatID === 0 || item.category.id === this.selectedCatID) &&
+        (item.title.toLowerCase().includes(this.searchFilter.toLowerCase()))
+      ))
+    );
+  }
+
+  // [Lab 6 Task 1] Buying logic
+  buy(prd: any) {
+    this.productsService.buyProduct(prd);
+  }
+
+  showDetails(prd: any) {
+    this.selectedProduct = prd;
+  }
+
+  hideDetails() {
+    this.selectedProduct = null;
+  }
+
+  // Platzi API Category IDs (Examples mapped to our labels)
+  categories: any[] = [
+    { id: 0, name: 'All' },
+    { id: 1, name: 'Clothes' },
+    { id: 2, name: 'Electronics' },
+    { id: 3, name: 'Furniture' }
+  ];
 }
-
-

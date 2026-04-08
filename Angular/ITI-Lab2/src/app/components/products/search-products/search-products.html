@@ -1,0 +1,83 @@
+<div class="container py-5">
+    <!-- Header Section -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark text-uppercase letter-spacing-2">Live Marketplace Search</h2>
+      <p class="text-muted">Query the real-time Platzi Fake Store API for top-tier electronics and fashion.</p>
+    </div>
+
+    <!-- [Lab 6 Task 5] Search Controls -->
+    <div class="row mb-5 justify-content-center">
+        <div class="col-lg-8">
+            <div class="input-group input-group-lg shadow-sm border rounded-pill overflow-hidden bg-white">
+                <span class="input-group-text bg-white border-0 text-muted px-4">
+                  <i class="fas fa-search"></i>
+                </span>
+                <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" 
+                       class="form-control border-0 py-3 shadow-none" 
+                       placeholder="Enter product title (e.g. 'Handmade', 'Classic', 'Electronic')...">
+                <button class="btn btn-dark px-5 fw-bold" (click)="onSearch()">
+                  SEARCH API
+                </button>
+            </div>
+            <div class="text-center mt-3 text-muted small">
+                <i class="fas fa-info-circle me-1"></i> Press <strong>Enter</strong> to trigger the live API fetch.
+            </div>
+        </div>
+    </div>
+
+    <!-- API Results Grid [Lab 6 Task 5] -->
+    <div class="row g-4 justify-content-center">
+        @if (products$ | async; as products) {
+            @if (products.length > 0) {
+                @for (prd of products; track prd.id) {
+                    <div class="col-sm-6 col-md-4 col-xl-3 animate__animated animate__fadeIn">
+                        <div class="product-card border-0 shadow-sm h-100 overflow-hidden bg-white rounded-4 transition-all">
+                            <!-- Image [Requirement: image] -->
+                            <div class="image-wrapper bg-light p-3 position-relative" style="height: 200px;">
+                                <img [src]="prd.images?.[0]" 
+                                     class="card-img-top w-100 h-100 object-fit-contain transition-zoom" 
+                                     [alt]="prd.title">
+                                <span class="badge bg-dark-subtle text-dark position-absolute top-0 start-0 m-3 px-3 rounded-pill fw-bold small">
+                                    {{ prd.category.name }}
+                                </span>
+                            </div>
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <!-- Title [Requirement: title] -->
+                                <h5 class="card-title fw-bold text-dark mb-1 h6 text-truncate" [title]="prd.title">
+                                    {{ prd.title }}
+                                </h5>
+                                <!-- Category [Requirement: category] -->
+                                <p class="text-muted tiny mb-3 fw-bold text-uppercase">{{ prd.category.name }} Edition</p>
+                                
+                                <!-- Price [Requirement: price] -->
+                                <div class="mt-auto">
+                                    <h4 class="text-emerald fw-extrabold mb-0 fs-5">${{ prd.price }}</h4>
+                                    <small class="text-muted tiny">Marketplace Ref: #{{prd.id}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            } @else {
+                <!-- Empty State -->
+                <div class="col-12 text-center py-5 opacity-50 animate__animated animate__fadeIn">
+                    <i class="fas fa-box-open fs-1 mb-3"></i>
+                    <h4 class="fw-bold">No results found on the server</h4>
+                    <p>Try searching for common terms like "Classic", "Electronic", or "Handmade".</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<style>
+.transition-all { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12) !important; }
+.object-fit-contain { object-fit: contain; }
+.transition-zoom { transition: transform 0.5s ease; }
+.product-card:hover .transition-zoom { transform: scale(1.08); }
+.letter-spacing-2 { letter-spacing: 2px; }
+.text-emerald { color: #059669; }
+.tiny { font-size: 0.72rem; }
+</style>

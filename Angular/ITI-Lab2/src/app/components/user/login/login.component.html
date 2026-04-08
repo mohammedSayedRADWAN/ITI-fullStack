@@ -1,0 +1,84 @@
+<!-- [Day 5 Lab Task] User Login Template -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-5">
+      
+      <!-- Login Card [Lab 5] -->
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden mb-4">
+        <div class="card-header bg-dark text-white text-center py-4 border-0">
+          <h2 class="mb-0 fw-extrabold text-uppercase letter-spacing-1">Secure Sign In</h2>
+          <p class="text-white-50 small mt-1">Access your professional dashboard</p>
+        </div>
+        <div class="card-body p-5">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            
+            <!-- (i) Email [Requirements: required, email] -->
+            <div class="mb-4">
+              <label class="form-label fw-bold small text-muted text-uppercase">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-envelope"></i></span>
+                <input type="email" formControlName="email" class="form-control border-start-0 py-3" 
+                       placeholder="your@email.com"
+                       [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid, 'is-valid': f['email'].touched && f['email'].valid}">
+                <!-- Bootstrap Validation Feedback -->
+                <div class="invalid-feedback animate__animated animate__headShake">
+                    @if (f['email'].errors?.['required']) { <span>Email is required for sign-in.</span> }
+                    @if (f['email'].errors?.['email'] || f['email'].errors?.['pattern']) { <span>Invalid email format.</span> }
+                </div>
+              </div>
+            </div>
+
+            <!-- (ii) Password [Requirements: required, minlength 6] -->
+            <div class="mb-5">
+              <label class="form-label fw-bold small text-muted text-uppercase">Security Password</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-lock"></i></span>
+                <input type="password" formControlName="password" class="form-control border-start-0 py-3" 
+                       placeholder="••••••••"
+                       [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid, 'is-valid': f['password'].touched && f['password'].valid}">
+                <!-- Bootstrap Validation Feedback -->
+                <div class="invalid-feedback animate__animated animate__headShake">
+                    @if (f['password'].errors?.['required']) { <span>Password is required.</span> }
+                    @if (f['password'].errors?.['minlength']) { <span>Password must be at least 6 characters.</span> }
+                </div>
+              </div>
+            </div>
+
+            <!-- Buttons [Lab 5 Reset included] -->
+            <div class="d-flex gap-3">
+              <button type="submit" class="btn btn-dark-premium flex-grow-1 py-3 fw-bold shadow-lg" [disabled]="loginForm.invalid">SIGN IN</button>
+              <button type="button" class="btn btn-outline-secondary px-4 fw-bold shadow-sm" (click)="onReset()">RESET</button>
+            </div>
+          </form>
+
+          <!-- Error Alert [Lab 5 Login Error] -->
+          @if (loginError) {
+             <div class="alert alert-danger mt-4 border-0 shadow-sm rounded-3 animate__animated animate__shakeX">
+                <i class="fas fa-exclamation-triangle me-2"></i><strong>Login Failed!</strong> Invalid credentials or user not found.
+             </div>
+          }
+        </div>
+      </div>
+
+      <!-- (d) Login Data Verified Message [Display values in card] -->
+      @if (loginSuccess && userData) {
+        <div class="card shadow border-0 rounded-4 animate__animated animate__fadeInUp">
+          <div class="card-body bg-success-subtle p-4 text-center">
+             <i class="fas fa-check-circle text-success fs-2 mb-2"></i>
+             <h5 class="fw-bold text-success">Login Confirmed</h5>
+             <p class="mb-0 text-muted mt-2">Welcome back, <strong>{{ userData.email }}</strong></p>
+             <p class="small text-muted">All registration requirements for Day 5 are now satisfied.</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+.fw-extrabold { font-weight: 800; }
+.btn-dark-premium { background-color: #0f172a; color: white; border: none; }
+.btn-dark-premium:hover { background-color: #334155; color: white; }
+.btn-dark-premium:disabled { background-color: #64748b; opacity: 0.7; }
+.letter-spacing-1 { letter-spacing: 1px; }
+</style>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function getAllUsers() {
+        let updateTodo = {
+          query: `mutation  {
+  updateTodo(id: 1, todo: {title: "Ramy",completed:false}) {
+    title
+    completed
+    user {
+      name
+    }
+  }
+}`,
+        };
+        // let userList = {
+        //   query: `{
+        //          users {
+        //               email
+        //               name
+        //             }
+        //       }`,
+        // };
+        let res = await fetch("http://localhost:3200/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateTodo),
+        });
+
+        // let users = await res.json();
+        let newTodo = await res.json();
+        // console.log("Users : ", users);
+        console.log("UpdatedTodo : ", newTodo);
+      }
+      getAllUsers()
+    </script>
+  </body>
+</html>

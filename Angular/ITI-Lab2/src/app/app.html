@@ -1,1 +1,69 @@
-<app-products></app-products>
+<!-- [Lab 6 Task 4] Refactored Navbar with Authentication Conditions -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3 mb-5 sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" routerLink="/"><i class="bi bi-box-seam-fill me-2 text-warning"></i>PREMIUM STORE</a>
+    
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center gap-3">
+        <!-- Main Links (Visible Always) -->
+        <li class="nav-item">
+          <a class="nav-link fw-bold px-3" routerLink="/products" routerLinkActive="active text-warning">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold px-3" routerLink="/search-products" routerLinkActive="active text-warning">Search API</a>
+        </li>
+
+        <div class="vr bg-white opacity-25 mx-2"></div>
+
+        <!-- [Lab 6 Task 4] Navbar Guest Conditions -->
+        @if (!authService.isLoggedIn()) {
+          <li class="nav-item">
+            <a class="btn btn-outline-light rounded-pill px-4 fw-bold shadow-sm" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-warning rounded-pill px-4 fw-bold shadow-sm" routerLink="/register">Join Us</a>
+          </li>
+        } @else {
+          <!-- [Lab 6 Task 4] Navbar Authenticated Conditions -->
+          <li class="nav-item">
+            <button class="btn btn-danger rounded-pill px-4 fw-bold shadow-sm" (click)="onLogout()">
+              <i class="fas fa-sign-out-alt me-2"></i>Logout
+            </button>
+          </li>
+        }
+
+        <div class="vr bg-white opacity-25 mx-2"></div>
+        
+        <!-- Utilities -->
+        <li class="nav-item">
+          <button class="btn btn-sm btn-outline-info rounded-circle d-flex align-items-center justify-content-center" 
+                  style="width: 40px; height: 40px;" (click)="toggleClock()" title="Toggle System Clock">
+            <i class="fas fa-clock fs-5"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-4">
+  <!-- Experimental: Keep the global clock functionality -->
+  @if (showClock) {
+    <div class="row mb-5 justify-content-center animate__animated animate__fadeInDown">
+      <div class="col-md-6 text-center">
+        <app-clock></app-clock>
+      </div>
+    </div>
+  }
+
+  <!-- [Lab 6 Task 2/3] Router Outlet for Dynamic Page Changes -->
+  <main class="router-viewport p-4 bg-white rounded-5 shadow-sm border animate__animated animate__fadeIn">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<style>
+.active.text-warning { color: #ffc107 !important; border-bottom: 2px solid #ffc107; }
+.nav-link:hover { color: #ffc107 !important; }
+.router-viewport { min-height: 70vh; }
+</style>

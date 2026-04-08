@@ -1,0 +1,151 @@
+<!-- [Day 5 Lab Task] User Registration Template -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      
+      <!-- Registration Card [Lab 5] -->
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden mb-5">
+        <div class="card-header bg-dark text-white text-center py-4 border-0">
+          <h2 class="mb-0 fw-extrabold text-uppercase letter-spacing-1">Join Premium Store</h2>
+          <p class="text-white-50 small mt-1">Experience shopping reinvented</p>
+        </div>
+        <div class="card-body p-5">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            
+            <!-- (i) Full Name [Requirements: required, minlength 5] -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Full Name</label>
+              <input type="text" formControlName="fullName" class="form-control py-3" 
+                     [ngClass]="{'is-invalid': f['fullName'].touched && f['fullName'].invalid, 'is-valid': f['fullName'].touched && f['fullName'].valid}">
+              <div class="invalid-feedback animate__animated animate__headShake">
+                @if (f['fullName'].errors?.['required']) { <span>Full name is required.</span> }
+                @if (f['fullName'].errors?.['minlength']) { <span>Minimum length is 5 characters.</span> }
+              </div>
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <!-- (ii) Email [Requirements: required, email, pattern] -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Email Address</label>
+              <input type="email" formControlName="email" class="form-control py-3"
+                     [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid, 'is-valid': f['email'].touched && f['email'].valid}">
+              <div class="invalid-feedback">
+                @if (f['email'].errors?.['required']) { <span>Email is required.</span> }
+                @if (f['email'].errors?.['email'] || f['email'].errors?.['pattern']) { <span>Invalid email format.</span> }
+              </div>
+              <div class="valid-feedback">Valid email address.</div>
+            </div>
+
+            <!-- (iii) Mobile Numbers [Dynamic Form Building] -->
+            <div class="mb-4">
+              <label class="form-label fw-bold small text-muted text-uppercase d-flex justify-content-between align-items-center">
+                Mobile Numbers
+                <button type="button" class="btn btn-link text-primary p-0 fw-bold small text-decoration-none" (click)="addMobile()">
+                  <i class="fas fa-plus-circle me-1"></i>Add Another Mobile
+                </button>
+              </label>
+              
+              <div formArrayName="mobileNumbers" class="mobile-stack d-grid gap-3">
+                @for (mobileControl of mobileNumbers.controls; track $index) {
+                  <div class="animate__animated animate__fadeInLeft">
+                    <div class="input-group">
+                      <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-phone-alt"></i></span>
+                      <input type="text" [formControlName]="$index" class="form-control border-start-0 py-3" 
+                             placeholder="Ex: 01012345678"
+                             [ngClass]="{'is-invalid': mobileControl.touched && mobileControl.invalid, 'is-valid': mobileControl.touched && mobileControl.valid}">
+                      @if ($index > 0) {
+                        <button type="button" class="btn btn-outline-danger px-3 shadow-sm border-start-0" 
+                                (click)="removeMobile($index)">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      }
+                    </div>
+                    
+                    <!-- Dynamic Validation Messages -->
+                    @if (mobileControl.touched && mobileControl.invalid) {
+                      <div class="text-danger tiny-msg mt-1">
+                        @if (mobileControl.errors?.['required']) { <span>Mobile number is required.</span> }
+                        @if (mobileControl.errors?.['pattern']) { <span>Must be 11 digits (Egyptian pattern 01...).</span> }
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- (iv) Password [Requirements: required, minlength 6] -->
+            <div class="mb-3">
+              <label class="form-label fw-bold small text-muted text-uppercase">Password</label>
+              <input type="password" formControlName="password" class="form-control py-3"
+                     [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid, 'is-valid': f['password'].touched && f['password'].valid}">
+              <div class="invalid-feedback">
+                @if (f['password'].errors?.['required']) { <span>Password is required.</span> }
+                @if (f['password'].errors?.['minlength']) { <span>Password must be at least 6 characters long.</span> }
+              </div>
+              <div class="valid-feedback">Strong password.</div>
+            </div>
+
+            <!-- (v) Confirm Password [Requirements: required, custom mismatch validator] -->
+            <div class="mb-5">
+              <label class="form-label fw-bold small text-muted text-uppercase">Confirm Password</label>
+              <input type="password" formControlName="confirmPassword" class="form-control py-3"
+                     [ngClass]="{'is-invalid': f['confirmPassword'].touched && (f['confirmPassword'].invalid || registerForm.errors?.['passwordMismatch']), 
+                                'is-valid': f['confirmPassword'].touched && f['confirmPassword'].valid && !registerForm.errors?.['passwordMismatch']}">
+              <div class="invalid-feedback text-danger">
+                @if (f['confirmPassword'].errors?.['required']) { <span>Confirm password is required.</span> }
+                @if (registerForm.errors?.['passwordMismatch']) { <span>Passwords do not match.</span> }
+              </div>
+              <div class="valid-feedback">Passwords match!</div>
+            </div>
+
+            <div class="d-flex gap-3">
+              <button type="submit" class="btn btn-dark-premium flex-grow-1 py-3 fw-bold shadow-lg" [disabled]="registerForm.invalid">REGISTER ACCOUNT</button>
+              <button type="button" class="btn btn-outline-secondary px-4 fw-bold shadow-sm" (click)="onReset()">RESET</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Display Registered User Data Card [Requirements Section (d)] -->
+      @if (submittedData) {
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden animate__animated animate__fadeInUp">
+          <div class="card-header bg-success text-white py-3 text-center border-0">
+             <i class="fas fa-check-circle fs-3 mb-2"></i>
+             <h5 class="mb-0 fw-bold">Registration Data Verified</h5>
+          </div>
+          <div class="card-body">
+            <div class="d-grid gap-2">
+              <div class="info-row d-flex justify-content-between p-2 rounded bg-light">
+                <span class="text-muted fw-bold">Full Name</span>
+                <span class="text-dark fw-bold">{{ submittedData.fullName }}</span>
+              </div>
+              <div class="info-row d-flex justify-content-between p-2 rounded bg-light">
+                <span class="text-muted fw-bold">Email Address</span>
+                <span class="text-dark fw-bold">{{ submittedData.email }}</span>
+              </div>
+              @for (mb of submittedData.mobileNumbers; track $index) {
+                <div class="info-row d-flex justify-content-between p-2 rounded bg-light">
+                  <span class="text-muted fw-bold">Mobile #{{$index + 1}}</span>
+                  <span class="text-dark fw-bold">{{ mb }}</span>
+                </div>
+              }
+              <div class="info-row d-flex justify-content-between p-2 rounded bg-light border border-warning">
+                <span class="text-muted fw-bold">Password</span>
+                <span class="text-dark fw-bold">******** (Secure)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+.fw-extrabold { font-weight: 800; }
+.tiny-msg { font-size: 0.75rem; font-weight: 600; padding-left: 10px; }
+.btn-dark-premium { background-color: #0f172a; color: white; border: none; }
+.btn-dark-premium:hover { background-color: #334155; color: white; }
+.btn-dark-premium:disabled { background-color: #64748b; opacity: 0.7; }
+.letter-spacing-1 { letter-spacing: 1px; }
+</style>
