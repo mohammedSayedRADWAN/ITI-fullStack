@@ -11,7 +11,7 @@ const port = process.env.PORT || 4000;
 let chatHistory = [
   {
     role: 'user',
-    content: 'أنت مساعد ذكي يتحدث باللغة العربية. أجب بشكل موجز وودود.',
+    content: 'You are a smart assistant that responds in English. Answer briefly and politely.',
     timestamp: new Date().toISOString(),
     isSystemPrompt: true
   }
@@ -50,7 +50,7 @@ const callDeepSeekAPI = async (deepseekKey) => {
         messages: deepseekMessages,
         temperature: 0.7,
         top_p: 1,
-        max_tokens: 2048
+        max_tokens: 500
       },
       {
         headers: {
@@ -125,7 +125,10 @@ app.post('/api/chat', async (req, res) => {
     }));
 
     const requestBody = {
-      contents: conversationContext
+      contents: conversationContext,
+      generationConfig: {
+        maxOutputTokens: 500
+      }
     };
 
     const apiKey = process.env.GEMINI_API_KEY;

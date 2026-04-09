@@ -1,0 +1,29 @@
+<section *ngIf="task() as taskDetails; else notFound" class="task-details-card">
+  <div class="task-details-header">
+    <div>
+      <h2 class="task-details-title">{{ taskDetails.title }}</h2>
+      <p class="task-status" [class.completed]="taskDetails.completed">
+        {{ taskDetails.completed ? 'Completed' : 'Pending' }}
+      </p>
+    </div>
+    <a routerLink="/" class="back-link">← Back to Tasks</a>
+  </div>
+
+  <div class="task-details-meta">
+    <span class="meta-item">Created: {{ taskDetails.createdAt | date:'mediumDate' }}</span>
+    <span class="meta-item">Task ID: {{ taskDetails.id }}</span>
+  </div>
+
+  <div class="task-details-body">
+    <h3>Description</h3>
+    <p>{{ taskDetails.description }}</p>
+  </div>
+</section>
+
+<ng-template #notFound>
+  <section class="task-details-empty">
+    <h2>Task not found</h2>
+    <p>The selected task does not exist or the URL is invalid.</p>
+    <a routerLink="/" class="back-link">← Go back to the task list</a>
+  </section>
+</ng-template>

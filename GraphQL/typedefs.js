@@ -2,6 +2,7 @@ const typeDefs = `#graphql
     type Query{
      #GET apis
      hello:String,
+     me:User
      users:[User],
      user(id:Int!):User
      todos:[Todo]
@@ -61,20 +62,28 @@ const typeDefs = `#graphql
         content:String,
     }
 
+    type AuthPayload {
+      token: String!
+      user: User!
+    }
+
     type Mutation{
+        signup(name:String!, email:String!, password:String!):AuthPayload
+        signin(email:String!, password:String!):AuthPayload
+
         #Post,Put,Delete
         # input
-        addTodo(todo:TodoInput,userId:Int!):Todo
+        addTodo(todo:TodoInput):Todo
         deleteTodo(id:Int!):String
         updateTodo(id:Int!,todo:TodoInput):Todo
 
         #Post,Put,Delete (posts)
-        addPost(post:PostInput,userId:Int!):Post
+        addPost(post:PostInput):Post
         deletePost(id:Int!):String
         updatePost(id:Int!,post:PostInput):Post
 
         #Post,Put,Delete (comments)
-        addComment(comment:CommentInput,userId:Int!,postId:Int!):Comment
+        addComment(comment:CommentInput,postId:Int!):Comment
         deleteComment(id:Int!):String
         updateComment(id:Int!,comment:CommentInput):Comment
     }

@@ -1,0 +1,259 @@
+/* ============================================
+   APP CONTAINER & LAYOUT
+   ============================================ */
+
+:host {
+  --primary-color: #4a90e2;
+  --secondary-color: #357abd;
+  --success-color: #4caf50;
+  --danger-color: #f44336;
+  --warning-color: #ff9800;
+  --dark-bg: #1a1a1a;
+  --light-bg: #f5f5f5;
+  --border-color: #e0e0e0;
+  --text-dark: #333;
+  --text-light: #666;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--light-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================================
+   NAVBAR STYLES
+   ============================================ */
+
+.navbar {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-title {
+  color: white;
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  transition: transform 0.3s ease;
+}
+
+.brand-title:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   NAVIGATION LINKS
+   ============================================ */
+
+.nav-links {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  border-bottom: 3px solid white;
+  border-radius: 6px 6px 0 0;
+}
+
+.link-icon {
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content-wrapper {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  min-height: 400px;
+}
+
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
+
+.app-footer {
+  background-color: var(--dark-bg);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .link-icon {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .content-wrapper {
+    padding: 1.5rem;
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .brand-title {
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 0.1rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .main-content {
+    padding: 0.75rem;
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .app-footer {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .footer-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================
+   ANIMATIONS & TRANSITIONS
+   ============================================ */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: slideDown 0.5s ease-out;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}

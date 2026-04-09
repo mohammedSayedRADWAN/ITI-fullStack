@@ -1,0 +1,12 @@
+@for (task of taskService.tasks(); track task.id) {
+  <div class="task-card">
+    <h3 class="task-title">
+        <a [routerLink]="['/task', task.id]">🔗 {{ task.title }}</a>
+       </h3>
+    <p class="task-description">{{ task.description }}
+    </p>
+            <small>{{ task.createdAt}}</small>
+
+  
+  </div>
+}

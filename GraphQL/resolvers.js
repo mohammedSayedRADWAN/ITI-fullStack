@@ -1,112 +1,199 @@
-import { Todos, Users, Posts, Comments } from "./_db.js";
-// nested resolvers
+import bcrypt from "bcrypt";
+import { AuthenticationError } from "apollo-server-errors";
+import User from "./models/User.js";
+import Todo from "./models/Todo.js";
+import Post from "./models/Post.js";
+import Comment from "./models/Comment.js";
+import { generateToken } from "./utils/auth.js";
+
+const requireAuth = (user) => {
+  if (!user) {
+    throw new AuthenticationError("Authentication required");
+  }
+  return user;
+};
+
 const resolvers = {
   Query: {
     hello: () => "Hello from GraphQl",
 
-    users: () => Users,
-    user: (_, { id }) => Users.find((u) => u.id === id),
+    me: async (_, __, { user }) => {
+      requireAuth(user);
+      return user;
+    },
 
-    todos: () => Todos,
-    todo: (_, { id }) => Todos.find((t) => t.id === id),
+    users: async (_, __, { user }) => {
+      requireAuth(user);
+      return User.find().lean();
+    },
+    user: async (_, { id }, { user }) => {
+      requireAuth(user);
+      return User.findOne({ id }).lean();
+    },
 
-    posts: () => Posts,
-    post: (_, { id }) => Posts.find((p) => p.id === id),
+    todos: async (_, __, { user }) => {
+      requireAuth(user);
+      return Todo.find().lean();
+    },
+    todo: async (_, { id }, { user }) => {
+      requireAuth(user);
+      return Todo.findOne({ id }).lean();
+    },
 
-    comments: () => Comments,
-    comment: (_, { id }) => Comments.find((c) => c.id === id),
+    posts: async (_, __, { user }) => {
+      requireAuth(user);
+      return Post.find().lean();
+    },
+    post: async (_, { id }, { user }) => {
+      requireAuth(user);
+      return Post.findOne({ id }).lean();
+    },
+
+    comments: async (_, __, { user }) => {
+      requireAuth(user);
+      return Comment.find().lean();
+    },
+    comment: async (_, { id }, { user }) => {
+      requireAuth(user);
+      return Comment.findOne({ id }).lean();
+    },
   },
 
   Todo: {
-    user(parent) {
-      return Users.find((u) => u.id === parent.userId);
-    },
+    user: async (parent) => User.findOne({ id: parent.userId }).lean(),
   },
 
   User: {
-    todos(parent) {
-      return Todos.filter((t) => t.userId === parent.id);
-    },
-    posts(parent) {
-      return Posts.filter((p) => p.userId === parent.id);
-    },
-    comments(parent) {
-      return Comments.filter((c) => c.userId === parent.id);
-    },
+    todos: async (parent) => Todo.find({ userId: parent.id }).lean(),
+    posts: async (parent) => Post.find({ userId: parent.id }).lean(),
+    comments: async (parent) => Comment.find({ userId: parent.id }).lean(),
   },
 
   Post: {
-    user(parent) {
-      return Users.find((u) => u.id === parent.userId);
-    },
-    comments(parent) {
-      return Comments.filter((c) => c.postId === parent.id);
-    },
+    user: async (parent) => User.findOne({ id: parent.userId }).lean(),
+    comments: async (parent) => Comment.find({ postId: parent.id }).lean(),
   },
 
   Comment: {
-    user(parent) {
-      return Users.find((u) => u.id === parent.userId);
-    },
-    post(parent) {
-      return Posts.find((p) => p.id === parent.postId);
-    },
+    user: async (parent) => User.findOne({ id: parent.userId }).lean(),
+    post: async (parent) => Post.findOne({ id: parent.postId }).lean(),
   },
 
   Mutation: {
-    addTodo(_, { todo, userId }) {
-      const newTodo = {
+    signup: async (_, { name, email, password }) => {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        throw new Error("Email is already in use");
+      }
+
+      const lastUser = await User.findOne().sort({ id: -1 });
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({
+        id: lastUser ? lastUser.id + 1 : 1,
+        name,
+        email,
+        password: hashedPassword,
+      });
+
+      await newUser.save();
+      const token = generateToken(newUser);
+      return { token, user: newUser.toObject() };
+    },
+
+    signin: async (_, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Invalid email or password");
+      }
+
+      const valid = await bcrypt.compare(password, user.password);
+      if (!valid) {
+        throw new AuthenticationError("Invalid email or password");
+      }
+
+      const token = generateToken(user);
+      return { token, user: user.toObject() };
+    },
+
+    addTodo: async (_, { todo }, { user }) => {
+      requireAuth(user);
+      const lastTodo = await Todo.findOne().sort({ id: -1 });
+      const newTodo = new Todo({
         ...todo,
-        userId,
-        id: Todos.length ? Todos[Todos.length - 1].id + 1 : 1,
-      };
-      Todos.push(newTodo);
-      return newTodo;
+        userId: user.id,
+        id: lastTodo ? lastTodo.id + 1 : 1,
+      });
+      return newTodo.save();
     },
 
-    addPost(_, { post, userId }) {
-      const newPost = {
+    addPost: async (_, { post }, { user }) => {
+      requireAuth(user);
+      const lastPost = await Post.findOne().sort({ id: -1 });
+      const newPost = new Post({
         ...post,
-        userId,
-        id: Posts.length ? Posts[Posts.length - 1].id + 1 : 1,
-      };
-      Posts.push(newPost);
-      return newPost;
+        userId: user.id,
+        id: lastPost ? lastPost.id + 1 : 1,
+      });
+      return newPost.save();
     },
 
-    updateTodo(_, { id, todo }) {
-      const oldTodo = Todos.find((t) => t.id === id);
-      if (!oldTodo) throw new Error("Todo not found");
-
-      Object.assign(oldTodo, todo);
-      return oldTodo;
+    addComment: async (_, { comment, postId }, { user }) => {
+      requireAuth(user);
+      const lastComment = await Comment.findOne().sort({ id: -1 });
+      const newComment = new Comment({
+        ...comment,
+        userId: user.id,
+        postId,
+        id: lastComment ? lastComment.id + 1 : 1,
+      });
+      return newComment.save();
     },
 
-    updatePost(_, { id, post }) {
-      const oldPost = Posts.find((p) => p.id === id);
-      if (!oldPost) throw new Error("Post not found");
-
-      Object.assign(oldPost, post);
-      return oldPost;
+    updateTodo: async (_, { id, todo }, { user }) => {
+      requireAuth(user);
+      const updated = await Todo.findOneAndUpdate({ id }, todo, {
+        new: true,
+      }).lean();
+      if (!updated) throw new Error("Todo not found");
+      return updated;
     },
 
-    deleteTodo(_, { id }) {
-      const index = Todos.findIndex((t) => t.id === id);
-      if (index === -1) return false;
-
-      Todos.splice(index, 1);
-      return true;
+    updatePost: async (_, { id, post }, { user }) => {
+      requireAuth(user);
+      const updated = await Post.findOneAndUpdate({ id }, post, {
+        new: true,
+      }).lean();
+      if (!updated) throw new Error("Post not found");
+      return updated;
     },
 
-    deletePost(_, { id }) {
-      const index = Posts.findIndex((p) => p.id === id);
-      if (index === -1) return false;
+    updateComment: async (_, { id, comment }, { user }) => {
+      requireAuth(user);
+      const updated = await Comment.findOneAndUpdate({ id }, comment, {
+        new: true,
+      }).lean();
+      if (!updated) throw new Error("Comment not found");
+      return updated;
+    },
 
-      Posts.splice(index, 1);
-      return true;
+    deleteTodo: async (_, { id }, { user }) => {
+      requireAuth(user);
+      const deleted = await Todo.findOneAndDelete({ id }).lean();
+      return deleted ? "Todo deleted successfully" : "Todo not found";
+    },
+
+    deletePost: async (_, { id }, { user }) => {
+      requireAuth(user);
+      const deleted = await Post.findOneAndDelete({ id }).lean();
+      return deleted ? "Post deleted successfully" : "Post not found";
+    },
+
+    deleteComment: async (_, { id }, { user }) => {
+      requireAuth(user);
+      const deleted = await Comment.findOneAndDelete({ id }).lean();
+      return deleted ? "Comment deleted successfully" : "Comment not found";
     },
   },
 };
-
 
 export default resolvers;
