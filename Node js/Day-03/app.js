@@ -1,26 +1,42 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./db/db');
+const globalErrorHandler = require('./middleware/errorMiddleware');
+const AppError = require('./utils/appError');
+
+// Import Routes
+const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 const app = express();
 
-
+// Middleware
 app.use(express.json());
-//Routes
+
+// Logging Middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+});
+
+// Routes
+app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 
+// 404 Handler (Catch-all for unknown routes)
+app.use((req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
 
-require('dotenv').config();
+// Task 2: Global Error Handler Middleware
+app.use(globalErrorHandler);
 
-if (!process.env.MONGO_URI) {
-    console.error(' Error: MONGO_URI is not defined in .env file');
-    process.exit(1);
-}
+// Database Connection
+connectDB();
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log(' Successfully connected to MongoDB Atlas!'))
-    .catch(err => console.error(' Connection error:', err.message));
-    app.listen(process.env.PORT || 3000, () => {
-        console.log(`🚀 Server running on port ${process.env.PORT || 3000}`);
-    }   );                  
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
