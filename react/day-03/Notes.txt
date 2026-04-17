@@ -1,0 +1,10 @@
+React Router v7
+
+
+Path => Component
+Route => Rule describe (Configuration)
+
+1. install React Router from npm => Terminal: npm i react-router
+
+2. Inside main.jsx update:
+import { createBrowserRouter } from "react-router";

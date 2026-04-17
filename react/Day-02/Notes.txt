@@ -1,0 +1,97 @@
+https://nerdcave.com/tailwind-cheat-sheet
+
+
+https://ui.shadcn.com/docs/installation/vite#existing-vite-project
+
+
+
+1. Terminal: npm create vite@latest
+2. Terminal: npm install tailwindcss @tailwindcss/vite
+3. Replace everything in src/index.css with the following:
+@import "tailwindcss";
+
+4. Create jsconfig.json inside root (not in ./src)
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+
+
+5. Update vite.config.js
+
+import { defineConfig } from 'vite';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
+import tailwindcss from '@tailwindcss/vite';
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': new URL('./src', import.meta.url).pathname,
+    },
+  },
+});
+
+
+6. Run the CLI
+Run the shadcn init command to set up shadcn/ui in your project:
+Terminal: npx shadcn@latest init
+
+Need to install the following packages:
+shadcn@4.2.0
+Ok to proceed? (y)
+√ Select a component library » Radix
+√ Which preset would you like to use? » Mira
+✔ Preflight checks.
+✔ Verifying framework. Found Vite.
+✔ Validating Tailwind CSS. Found v4.
+✔ Validating import alias.
+✔ Writing components.json.
+✔ Checking registry.
+✔ Installing dependencies.
+⠼ Updating files.[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+✔ Created 2 files:
+  - src\components\ui\button.jsx
+  - src\lib\utils.js
+✔ Updating src\index.css
+
+Project initialization completed.
+You may now add components.
+
+
+
+7. Terminal: npx shadcn@latest add --all
+
+
+React Hooks: functions able to use React Features Methods/Properties
+The Rules to use React Hooks:
+1. At Top Level (Before Return)
+2. Call Hooks inside HTML Part use React Functions
+
+
+
+prop => Properties: inputs to components (parent => child)
+
+
+state: built-in objects => component contain it's data (internal memory)
+
+
+# useState(initialValue)
+
+
+const [stateVariable, setStateVariable] = useState(initialValue);
+
+
+Conditional Rendering
+if
+else
+
+
+?: => use for two cases one for true, another for false
+&& => use to show something only when a condition is true
