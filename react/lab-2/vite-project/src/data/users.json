@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "username": "admin_user",
+    "name": "Admin",
+    "email": "admin@mail.com",
+    "phone": "0123456789",
+    "birthdate": "1990-01-01",
+    "role": "admin",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=admin"
+  },
+  {
+    "id": 2,
+    "username": "john_doe",
+    "name": "User One",
+    "email": "user1@mail.com",
+    "phone": "0987654321",
+    "birthdate": "1995-05-05",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user1"
+  },
+  {
+    "id": 3,
+    "username": "moderator_1",
+    "name": "Moderator",
+    "email": "mod@mail.com",
+    "phone": "0112233445",
+    "birthdate": "1988-08-08",
+    "role": "moderator",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=mod"
+  },
+  {
+    "id": 4,
+    "username": "jane_smith",
+    "name": "User Two",
+    "email": "user2@mail.com",
+    "phone": "0100112233",
+    "birthdate": "1998-12-12",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user2"
+  },
+  {
+    "id": 5,
+    "username": "user5",
+    "name": "User Five",
+    "email": "user5@mail.com",
+    "phone": "0100112233",
+    "birthdate": "1998-12-12",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user5"
+  },
+  {
+    "id": 6,
+    "username": "user6",
+    "name": "User Six",
+    "email": "user6@mail.com",
+    "phone": "0100112233",
+    "birthdate": "1998-12-12",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user6"
+  },
+  {
+    "id": 7,
+    "username": "user7",
+    "name": "User Seven",
+    "email": "user7@mail.com",
+    "phone": "0100112233",
+    "birthdate": "1998-12-12",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user7"
+  },
+  {
+    "id": 8,
+    "username": "user8",
+    "name": "User Eight",
+    "email": "user8@mail.com",
+    "phone": "0100112233",
+    "birthdate": "1998-12-12",
+    "role": "user",
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=user8"
+  }
+]
