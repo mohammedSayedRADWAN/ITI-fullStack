@@ -1,5 +1,6 @@
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const staduimId = urlParams.get("stadium");
 const staduimNames=['ملعب العالمى','fun city club','ملعب الهاشمى']
 document.getElementById("stadiumNameDisplay").innerHTML = staduimNames.at(staduimId-1);
